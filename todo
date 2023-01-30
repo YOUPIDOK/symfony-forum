@@ -1,11 +1,23 @@
+slug
+vich file Resource
+
 Flash messages
 Navbar
 
 CRUD
     - Users
-    -
-    -
-    -
-    -
-    -
-    -
+        - Students
+        - Speakers
+        - Right
+        - Enable
+    - Job
+    - Job Activity
+    - Job Skill
+    - Forum
+    - Sector
+    - Workshop
+    - Ressource
+    - Survey
+    - Survey question
+    - Survey answer
+    - Companies

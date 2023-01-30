@@ -3,20 +3,29 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity('email')]
+#[ORM\Table(name: 'users')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[NotNull]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -34,7 +43,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastname = null;
 
     #[ORM\Column(length: 13)]
+    #[NotNull]
     private ?string $telephone = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Speaker::class, cascade: ['remove'])]
+    private Collection $speakers;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Student::class, cascade: ['remove'])]
+    private Collection $students;
+
+    public function __construct()
+    {
+        $this->speakers = new ArrayCollection();
+        $this->students = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +177,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Speaker>
+     */
+    public function getSpeakers(): Collection
+    {
+        return $this->speakers;
+    }
+
+    public function addSpeaker(Speaker $speaker): self
+    {
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers->add($speaker);
+            $speaker->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpeaker(Speaker $speaker): self
+    {
+        if ($this->speakers->removeElement($speaker)) {
+            // set the owning side to null (unless already changed)
+            if ($speaker->getUser() === $this) {
+                $speaker->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Student>
+     */
+    public function getStudents(): Collection
+    {
+        return $this->students;
+    }
+
+    public function addStudent(Student $student): self
+    {
+        if (!$this->students->contains($student)) {
+            $this->students->add($student);
+            $student->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudent(Student $student): self
+    {
+        if ($this->students->removeElement($student)) {
+            // set the owning side to null (unless already changed)
+            if ($student->getUser() === $this) {
+                $student->setUser(null);
+            }
+        }
 
         return $this;
     }

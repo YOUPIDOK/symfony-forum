@@ -38,6 +38,7 @@ class UserCreateCommand extends Command
         $user = (new User())
             ->setFirstname($io->ask('Firstname '))
             ->setLastname($io->ask('Lastname '))
+            ->setTelephone($io->ask('Telephone '))
             ->setEmail($io->ask('E-mail ', null, function ($email) use ($userRepo) {
                 if ($userRepo->findOneBy(['email' => $email]) !== null) {
                     throw new \RuntimeException('User already exist');
