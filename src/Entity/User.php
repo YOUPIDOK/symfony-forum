@@ -33,6 +33,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[NotNull]
     private ?string $lastname = null;
 
+    #[ORM\Column(length: 13)]
+    private ?string $telephone = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,8 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getIdentity(?bool $addPrefix = false): string
     {
-        $toString = '';
-        $toString .= $this->firstname !== null ? (ucfirst($this->firstname) . ' ') : '';
+        $toString = $this->firstname !== null ? (ucfirst($this->firstname) . ' ') : '';
         $toString .= $this->lastname !== null ? ucfirst($this->lastname) : '';
 
         return $toString;
@@ -141,6 +143,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }
