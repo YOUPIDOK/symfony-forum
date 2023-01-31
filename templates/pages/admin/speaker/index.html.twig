@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Speaker index{% endblock %}
+
+{% block body %}
+    <h1>Speaker index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for speaker in speakers %}
+            <tr>
+                <td>{{ speaker.id }}</td>
+                <td>{{ speaker.createdAt ? speaker.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ speaker.updatedAt ? speaker.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_speaker_show', {'id': speaker.id}) }}">show</a>
+                    <a href="{{ path('admin_speaker_edit', {'id': speaker.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_speaker_new') }}">Create new</a>
+{% endblock %}

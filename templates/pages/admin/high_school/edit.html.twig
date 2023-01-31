@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit HighSchool{% endblock %}
+
+{% block body %}
+    <h1>Edit HighSchool</h1>
+
+    {{ include('pages/admin/high_school/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_high_school_index') }}">back to list</a>
+
+    {{ include('pages/admin/high_school/_delete_form.html.twig') }}
+{% endblock %}
