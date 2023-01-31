@@ -52,10 +52,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Student::class, cascade: ['remove'])]
     private Collection $students;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: HighSchool::class, cascade: ['remove'])]
+    private Collection $highSchools;
+
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
         $this->students = new ArrayCollection();
+        $this->highSchools = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -235,6 +239,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($student->getUser() === $this) {
                 $student->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HighSchool>
+     */
+    public function getHighSchools(): Collection
+    {
+        return $this->highSchools;
+    }
+
+    public function addHighSchool(HighSchool $highSchool): self
+    {
+        if (!$this->highSchools->contains($highSchool)) {
+            $this->highSchools->add($highSchool);
+            $highSchool->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHighSchool(HighSchool $highSchool): self
+    {
+        if ($this->highSchools->removeElement($highSchool)) {
+            // set the owning side to null (unless already changed)
+            if ($highSchool->getUser() === $this) {
+                $highSchool->setUser(null);
             }
         }
 

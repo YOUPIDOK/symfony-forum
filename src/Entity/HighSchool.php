@@ -26,6 +26,9 @@ class HighSchool
     #[ORM\OneToMany(mappedBy: 'highSchool', targetEntity: Student::class, cascade: ['remove'])]
     private Collection $students;
 
+    #[ORM\ManyToOne(inversedBy: 'highSchools')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
@@ -79,6 +82,18 @@ class HighSchool
                 $student->setHighSchool(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
