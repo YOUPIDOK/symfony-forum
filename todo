@@ -1,5 +1,6 @@
 TODO :
     - Crud
+        - Inscription
         - Verify *
             - Show
             - Index
@@ -10,7 +11,7 @@ TODO :
         - Page accueil Vue
         - Liste des ateliers
         - Presentaion d'un atelier
-        - Inscription lyceen
+        - Inscription lyceen (Front)
     - Page profil lyceen
     - Page profil lycee
     - Monitoring d’inscription par lycée pour le forum en cours (pour l’admin ou le lycée concerné)

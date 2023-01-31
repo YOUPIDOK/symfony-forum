@@ -50,20 +50,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[NotNull]
     private ?string $telephone = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Speaker::class, cascade: ['remove'])]
-    private Collection $speakers;
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Student $student = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Student::class, cascade: ['remove'])]
-    private Collection $students;
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?HighSchool $highSchool = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: HighSchool::class, cascade: ['remove'])]
-    private Collection $highSchools;
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Speaker $speaker = null;
 
     public function __construct()
     {
-        $this->speakers = new ArrayCollection();
-        $this->students = new ArrayCollection();
-        $this->highSchools = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -225,92 +222,68 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Speaker>
-     */
-    public function getSpeakers(): Collection
+    public function getStudent(): ?Student
     {
-        return $this->speakers;
+        return $this->student;
     }
 
-    public function addSpeaker(Speaker $speaker): self
+    public function setStudent(?Student $student): self
     {
-        if (!$this->speakers->contains($speaker)) {
-            $this->speakers->add($speaker);
-            $speaker->setUser($this);
+        // unset the owning side of the relation if necessary
+        if ($student === null && $this->student !== null) {
+            $this->student->setUser(null);
         }
 
-        return $this;
-    }
-
-    public function removeSpeaker(Speaker $speaker): self
-    {
-        if ($this->speakers->removeElement($speaker)) {
-            // set the owning side to null (unless already changed)
-            if ($speaker->getUser() === $this) {
-                $speaker->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Student>
-     */
-    public function getStudents(): Collection
-    {
-        return $this->students;
-    }
-
-    public function addStudent(Student $student): self
-    {
-        if (!$this->students->contains($student)) {
-            $this->students->add($student);
+        // set the owning side of the relation if necessary
+        if ($student !== null && $student->getUser() !== $this) {
             $student->setUser($this);
         }
 
+        $this->student = $student;
+
         return $this;
     }
 
-    public function removeStudent(Student $student): self
+    public function getHighSchool(): ?HighSchool
     {
-        if ($this->students->removeElement($student)) {
-            // set the owning side to null (unless already changed)
-            if ($student->getUser() === $this) {
-                $student->setUser(null);
-            }
+        return $this->highSchool;
+    }
+
+    public function setHighSchool(?HighSchool $highSchool): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($highSchool === null && $this->highSchool !== null) {
+            $this->highSchool->setUser(null);
         }
 
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, HighSchool>
-     */
-    public function getHighSchools(): Collection
-    {
-        return $this->highSchools;
-    }
-
-    public function addHighSchool(HighSchool $highSchool): self
-    {
-        if (!$this->highSchools->contains($highSchool)) {
-            $this->highSchools->add($highSchool);
+        // set the owning side of the relation if necessary
+        if ($highSchool !== null && $highSchool->getUser() !== $this) {
             $highSchool->setUser($this);
         }
 
+        $this->highSchool = $highSchool;
+
         return $this;
     }
 
-    public function removeHighSchool(HighSchool $highSchool): self
+    public function getSpeaker(): ?Speaker
     {
-        if ($this->highSchools->removeElement($highSchool)) {
-            // set the owning side to null (unless already changed)
-            if ($highSchool->getUser() === $this) {
-                $highSchool->setUser(null);
-            }
+        return $this->speaker;
+    }
+
+    public function setSpeaker(?Speaker $speaker): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($speaker === null && $this->speaker !== null) {
+            $this->speaker->setUser(null);
         }
+
+        // set the owning side of the relation if necessary
+        if ($speaker !== null && $speaker->getUser() !== $this) {
+            $speaker->setUser($this);
+        }
+
+        $this->speaker = $speaker;
 
         return $this;
     }

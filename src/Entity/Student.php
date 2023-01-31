@@ -20,10 +20,6 @@ class Student
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'students')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
     #[ORM\ManyToOne(inversedBy: 'students')]
     #[NotNull]
     private ?HighSchool $highSchool = null;
@@ -34,6 +30,10 @@ class Student
 
     #[ORM\OneToMany(mappedBy: 'student', targetEntity: SurveyAnswer::class, cascade: ['remove'])]
     private Collection $surveyAnswers;
+
+    #[ORM\OneToOne(inversedBy: 'student', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __toString(): string
     {
@@ -48,18 +48,6 @@ class Student
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getHighSchool(): ?HighSchool
@@ -112,6 +100,18 @@ class Student
                 $surveyAnswer->setStudent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

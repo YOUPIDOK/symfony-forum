@@ -22,11 +22,6 @@ class Speaker
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'speakers')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[NotNull]
-    private ?User $user = null;
-
     #[ORM\ManyToOne(inversedBy: 'speakers')]
     #[ORM\JoinColumn(nullable: false)]
     #[NotNull]
@@ -34,6 +29,10 @@ class Speaker
 
     #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'speakers')]
     private Collection $workshops;
+
+    #[ORM\OneToOne(inversedBy: 'speaker', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __toString(): string
     {
@@ -48,18 +47,6 @@ class Speaker
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getCompany(): ?Company
@@ -97,6 +84,18 @@ class Speaker
         if ($this->workshops->removeElement($workshop)) {
             $workshop->removeSpeaker($this);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
