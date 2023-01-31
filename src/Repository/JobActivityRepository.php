@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\JobActivity;
+use App\Entity\Workshop;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @extends ServiceEntityRepository<JobActivity>
@@ -37,6 +39,21 @@ class JobActivityRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByWorkshop(Workshop $workshop)
+    {
+        $qb = $this
+            ->createQueryBuilder('a')
+            ->innerJoin('a.jobs', 'job')
+            ->innerJoin('job.workshops ', 'workshops');
+
+        return $qb
+            ->where($qb->expr()->in(':workshopFilter', 'workshops'))
+            ->distinct('a')
+            ->setParameter('workshopFilter', $workshop)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

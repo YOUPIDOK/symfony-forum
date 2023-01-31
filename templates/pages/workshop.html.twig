@@ -24,7 +24,22 @@
         {% endfor %}
     </div>
 
-    // Metier
-    // COmpetences globale
-    // Activitées
+    <div>
+        {% for job in workshop.jobs %}
+            <div>{{ job.name }}</div>
+        {% endfor %}
+    </div>
+
+    <div>
+        {% for activity in jobActivities %}
+            <div>{{ activity.name }}</div>
+        {% endfor %}
+    </div>
+
+    <div>
+        {% for skill in jobSkills %}
+            <div>{{ skill.name }}</div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

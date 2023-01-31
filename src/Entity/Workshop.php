@@ -53,8 +53,8 @@ class Workshop
     private ?Room $room = null;
 
     #[ORM\ManyToMany(targetEntity: Job::class, inversedBy: 'workshops')]
-    #[Count(min: 1, minMessage: 'Minimum 1')]
     #[ORM\JoinTable(name: 'workshop_as_job')]
+    #[Count(min: 1, minMessage: 'Minimum 1')]
     private Collection $jobs;
 
     public function __construct()

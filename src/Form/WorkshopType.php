@@ -66,7 +66,7 @@ class WorkshopType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('speakers', EntitySelectChoicesType::class, [
+            ->add('jobs', EntitySelectChoicesType::class, [
                 'label' => 'Métiers',
                 'class' => Job::class,
                 'required' => false,
