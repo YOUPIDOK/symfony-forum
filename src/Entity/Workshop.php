@@ -47,6 +47,10 @@ class Workshop
     #[ORM\JoinTable(name: 'workshop_as_resource')]
     private Collection $resources;
 
+    #[ORM\ManyToOne(inversedBy: 'workshops')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Room $room = null;
+
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
@@ -167,6 +171,18 @@ class Workshop
     public function removeResource(Resource $resource): self
     {
         $this->resources->removeElement($resource);
+
+        return $this;
+    }
+
+    public function getRoom(): ?Room
+    {
+        return $this->room;
+    }
+
+    public function setRoom(?Room $room): self
+    {
+        $this->room = $room;
 
         return $this;
     }

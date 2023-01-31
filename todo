@@ -1,5 +1,7 @@
 TODO :
     - Crud
+        - Verify *
+        - Salles
         - Ressource
             - vich file Resource
     - Public
@@ -24,9 +26,3 @@ TODO ++ :
     - Flash messages
     - Pager
     - Format date crud
-
-
-
-
-
-
