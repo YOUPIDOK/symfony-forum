@@ -12,12 +12,8 @@ class SpeakerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('user')
-            ->add('company')
-            ->add('workshops')
-        ;
+            ->add('user', UserType::class)
+            ->add('company');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
