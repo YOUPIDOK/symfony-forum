@@ -49,12 +49,19 @@ class Workshop
 
     #[ORM\ManyToOne(inversedBy: 'workshops')]
     #[ORM\JoinColumn(nullable: true)]
+
     private ?Room $room = null;
+
+    #[ORM\ManyToMany(targetEntity: Job::class, inversedBy: 'workshops')]
+    #[Count(min: 1, minMessage: 'Minimum 1')]
+    #[ORM\JoinTable(name: 'workshop_as_job')]
+    private Collection $jobs;
 
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
         $this->resources = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -183,6 +190,30 @@ class Workshop
     public function setRoom(?Room $room): self
     {
         $this->room = $room;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Job>
+     */
+    public function getJobs(): Collection
+    {
+        return $this->jobs;
+    }
+
+    public function addJob(Job $job): self
+    {
+        if (!$this->jobs->contains($job)) {
+            $this->jobs->add($job);
+        }
+
+        return $this;
+    }
+
+    public function removeJob(Job $job): self
+    {
+        $this->jobs->removeElement($job);
 
         return $this;
     }

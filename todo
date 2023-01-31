@@ -1,16 +1,18 @@
 TODO :
     - Crud
         - Verify *
-        - Salles
-        - Ressource
+            - Show
+            - Index
+        - Ressource (A voir plus tard - pas le plus important)
             - vich file Resource
+
     - Public
         - Page accueil Vue
         - Liste des ateliers
         - Presentaion d'un atelier
         - Inscription lyceen
     - Page profil lyceen
-    - Page profil lyceen
+    - Page profil lycee
     - Monitoring d’inscription par lycée pour le forum en cours (pour l’admin ou le lycée concerné)
     - Monitoring d’inscription par atelier pour le forum en cours (pour l’admin ou le lycée concerné)
     - Page pour remplir le questionnaire (et chiffrement après validation des données)
@@ -18,8 +20,6 @@ TODO :
     - Une commande pour chiffrer les données personnelles des élèves
     - Point d’entrée pour une API (sans authentification) pour récupérer le nombre d’inscrit par atelier et créneau
         horaire
-    - High school profile
-    - User profile
 
 TODO ++ :
     - Question order

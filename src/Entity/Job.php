@@ -34,10 +34,14 @@ class Job
     #[Count(min: 1, minMessage: 'Minimum 1.')]
     private Collection $jobActivities;
 
+    #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'jobs')]
+    private Collection $workshops;
+
     public function __construct()
     {
         $this->jobSkills = new ArrayCollection();
         $this->jobActivities = new ArrayCollection();
+        $this->workshops = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -106,6 +110,33 @@ class Job
     public function removeJobActivity(JobActivity $jobActivity): self
     {
         $this->jobActivities->removeElement($jobActivity);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Workshop>
+     */
+    public function getWorkshops(): Collection
+    {
+        return $this->workshops;
+    }
+
+    public function addWorkshop(Workshop $workshop): self
+    {
+        if (!$this->workshops->contains($workshop)) {
+            $this->workshops->add($workshop);
+            $workshop->addJob($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshop(Workshop $workshop): self
+    {
+        if ($this->workshops->removeElement($workshop)) {
+            $workshop->removeJob($this);
+        }
 
         return $this;
     }

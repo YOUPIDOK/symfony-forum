@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Atelier {{ workshop.name }}{% endblock %}
+
+{% block body %}
+    <div>{{ workshop.name }}</div>
+    <div>Début : {{ workshop.startAt | date('d/m/y H:i') }}</div>
+    <div>Fin : {{ workshop.endAt | date('d/m/y H:i') }}</div>
+    <div>Secteur : {{ workshop.sector.name }}</div>
+
+    <div></div>
+
+    {% if workshop.room is not null %}
+        <div>
+            <div>{{ workshop.room.name }} - Étage {{ workshop.room.floor }}</div>
+            <div>{{ workshop.room.capacity }} personnes</div>
+        </div>
+        {# TODO : nb inscrit #}
+    {% endif %}
+
+    <div>
+        {% for speaker in workshop.speakers %}
+            <div>{{ speaker.user.identity }}</div>
+        {% endfor %}
+    </div>
+
+    // Metier
+    // COmpetences globale
+    // Activitées
+{% endblock %}

@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Job;
 use App\Entity\JobActivity;
 use App\Entity\Forum;
+use App\Entity\Room;
 use App\Entity\Speaker;
 use App\Entity\Workshop;
 use App\Form\CustomType\EntitySelectChoicesType;
@@ -63,6 +65,17 @@ class WorkshopType extends AbstractType
                 'class' => Speaker::class,
                 'required' => false,
                 'multiple' => true,
+            ])
+            ->add('speakers', EntitySelectChoicesType::class, [
+                'label' => 'Métiers',
+                'class' => Job::class,
+                'required' => false,
+                'multiple' => true,
+            ])
+            ->add('room', EntitySelectChoicesType::class, [
+                'label' => 'Salle',
+                'class' => Room::class,
+                'required' => false,
             ])
         ;
     }

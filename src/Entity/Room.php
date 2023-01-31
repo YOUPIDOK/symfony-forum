@@ -41,6 +41,14 @@ class Room
     #[NotNull]
     private ?bool $available = true;
 
+    public function __toString(): string
+    {
+        $toString = $this->name !== null ? (ucfirst($this->name) . ' ') : '';
+        $toString .= $this->floor !== null ? ucfirst($this->floor) : '';
+
+        return $toString;
+    }
+
     public function __construct()
     {
         $this->workshops = new ArrayCollection();

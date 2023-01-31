@@ -39,6 +39,15 @@ class ForumRepository extends ServiceEntityRepository
         }
     }
 
+    public function findLastForum()
+    {
+        return $this
+            ->createQueryBuilder('forum')
+            ->orderBy('forum.endAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 //    /**
 //     * @return Forum[] Returns an array of Forum objects
 //     */

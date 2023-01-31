@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ateliers{% endblock %}
+
+{% block body %}
+    <h1>Ateliers :</h1>
+
+    {% if forum is not null %}
+        <ul class="p-2">
+            {% for workshop in forum.workshops %}
+                <li>- {{ workshop.name }} : <a href="{{ path('workshop', {id: workshop.id}) }}">voir</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    {% if forum is null or forum.workshops|length == 0  %}
+        Aucun atelier disponible pour le moment.
+    {% endif %}
+{% endblock %}
