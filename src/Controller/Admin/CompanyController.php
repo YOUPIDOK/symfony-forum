@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/company')]
+#[Route('/admin/entreprise')]
 class CompanyController extends AbstractController
 {
     #[Route('/', name: 'admin_company_index', methods: ['GET'])]
