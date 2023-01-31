@@ -48,7 +48,7 @@ class Workshop
     private Collection $resources;
 
     #[ORM\ManyToOne(inversedBy: 'workshops')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Room $room = null;
 
     public function __construct()
