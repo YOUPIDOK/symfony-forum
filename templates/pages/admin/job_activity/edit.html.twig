@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit JobActivity{% endblock %}
+
+{% block body %}
+    <h1>Edit JobActivity</h1>
+
+    {{ include('pages/admin/job_activity/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_job_activity_index') }}">back to list</a>
+
+    {{ include('pages/admin/job_activity/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Job{% endblock %}
+
+{% block body %}
+    <h1>Job</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ job.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ job.name }}</td>
+            </tr>
+            <tr>
+                <th>Skills</th>
+                <td>
+                    {{ job.jobSKills|join(', ') }}
+                </td>
+            </tr>
+            <tr>
+                <th>Activity</th>
+                <td>
+                    {{ job.jobActivities|join(', ') }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_job_index') }}">back to list</a>
+
+    <a href="{{ path('admin_job_edit', {'id': job.id}) }}">edit</a>
+
+    {{ include('pages/admin/job/_delete_form.html.twig') }}
+{% endblock %}

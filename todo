@@ -1,3 +1,5 @@
+VOter
+
 vich file Resource
 
 Flash messages
@@ -11,12 +13,8 @@ CRUD
         - Right
         - Enable
     - Job
-    - Job Activity
-    - Job Skill
-    - Sector
     - Workshop
     - Resource
     - Survey
     - Survey question
-    - Survey answer
     - Companies

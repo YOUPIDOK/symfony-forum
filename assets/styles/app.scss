@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url("@fortawesome/fontawesome-free/css/all.min.css");
+@import "~choices.js/src/styles/choices";
 
 body {
   background-color: lightgray;

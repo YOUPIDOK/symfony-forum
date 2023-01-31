@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity(repositoryClass: JobRepository::class)]
@@ -25,10 +26,12 @@ class Job
 
     #[ORM\ManyToMany(targetEntity: JobSkill::class, inversedBy: 'jobs')]
     #[ORM\JoinTable(name: 'job_as_job_skill')]
+    #[Count(min: 1, minMessage: 'Minimum 1.')]
     private Collection $jobSkills;
 
     #[ORM\ManyToMany(targetEntity: JobActivity::class, inversedBy: 'jobs')]
     #[ORM\JoinTable(name: 'job_as_job_activity')]
+    #[Count(min: 1, minMessage: 'Minimum 1.')]
     private Collection $jobActivities;
 
     public function __construct()
