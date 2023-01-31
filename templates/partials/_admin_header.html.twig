@@ -87,7 +87,7 @@
           ' }}   
           href="{{ path('admin_workshop_index') }}" 
         >
-          Workshop
+          Ateliers
         </a>
     </li>
     <li class="mr-2">
@@ -166,6 +166,19 @@
           href="{{ path('admin_user_index') }}" 
         >
           Utilisateurs
+        </a>
+    </li>
+    <li class="mr-2">
+        <a
+                {{ app.request.get('_route') starts with 'admin_room' ? '
+              aria-current="page"
+              class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+          ' : '
+              class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+          ' }}
+                href="{{ path('admin_room_index') }}"
+        >
+            Salles
         </a>
     </li>
 </ul>

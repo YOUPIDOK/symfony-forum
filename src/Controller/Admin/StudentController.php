@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Student;
 use App\Entity\User;
+use App\Enum\UserRoleEnum;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,7 @@ class StudentController extends AbstractController
     public function new(Request $request, StudentRepository $studentRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $student = new Student();
-        $form = $this->createForm(StudentType::class, $student);
+        $form = $this->createForm(StudentType::class, $student, ['required_password' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,6 +37,8 @@ class StudentController extends AbstractController
                 $hashedPassword = $passwordHasher->hashPassword($student->getUser(), $plainPassword);
                 $student->getUser()->setPassword($hashedPassword);
             }
+
+            $student->getUser()->addRole(UserRoleEnum::ROLE_STUDENT);
 
             $studentRepository->save($student, true);
 

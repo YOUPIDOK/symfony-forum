@@ -35,6 +35,11 @@ class Speaker
     #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'speakers')]
     private Collection $workshops;
 
+    public function __toString(): string
+    {
+        return '' . $this->user?->getIdentity();
+    }
+
     public function __construct()
     {
         $this->workshops = new ArrayCollection();

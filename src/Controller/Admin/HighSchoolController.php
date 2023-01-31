@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\HighSchool;
 use App\Entity\User;
+use App\Enum\UserRoleEnum;
 use App\Form\HighSchoolType;
 use App\Repository\HighSchoolRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,7 @@ class HighSchoolController extends AbstractController
     public function new(Request $request, HighSchoolRepository $highSchoolRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $highSchool = new HighSchool();
-        $form = $this->createForm(HighSchoolType::class, $highSchool);
+        $form = $this->createForm(HighSchoolType::class, $highSchool, ['required_password' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,7 +37,9 @@ class HighSchoolController extends AbstractController
                 $hashedPassword = $passwordHasher->hashPassword($highSchool->getUser(), $plainPassword);
                 $highSchool->getUser()->setPassword($hashedPassword);
             }
+            $highSchool->getUser()->addRole(UserRoleEnum::ROLE_HIGH_SCHOOL);
             $highSchoolRepository->save($highSchool, true);
+
 
             return $this->redirectToRoute('admin_high_school_index', [], Response::HTTP_SEE_OTHER);
         }

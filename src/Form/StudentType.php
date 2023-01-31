@@ -14,7 +14,7 @@ class StudentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('user', UserType::class)
+            ->add('user', UserType::class, ['required_password' => $options['required_password']])
             ->add('degree', ChoiceType::class, [
                 'label' => 'Classe',
                 'required' => true,
@@ -26,6 +26,7 @@ class StudentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'required_password' => false,
             'data_class' => Student::class,
         ]);
     }

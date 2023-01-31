@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Count;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Range;
 
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
 #[ORM\Table(name: 'rooms')]
@@ -19,16 +22,24 @@ class Room
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotNull]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[NotNull]
     private ?string $floor = null;
 
     #[ORM\Column]
+    #[NotNull]
+    #[Range(min: 1)]
     private ?int $capacity = null;
 
     #[ORM\OneToMany(mappedBy: 'room', targetEntity: Workshop::class, cascade: ['remove'])]
     private Collection $workshops;
+
+    #[ORM\Column]
+    #[NotNull]
+    private ?bool $available = true;
 
     public function __construct()
     {
@@ -102,6 +113,18 @@ class Room
                 $workshop->setRoom(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isAvailable(): ?bool
+    {
+        return $this->available;
+    }
+
+    public function setAvailable(bool $available): self
+    {
+        $this->available = $available;
 
         return $this;
     }

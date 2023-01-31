@@ -12,7 +12,7 @@ class HighSchoolType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('user', UserType::class)
+            ->add('user', UserType::class, ['required_password' => $options['required_password']])
             ->add('name')
         ;
     }
@@ -20,6 +20,7 @@ class HighSchoolType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'required_password' => false,
             'data_class' => HighSchool::class,
         ]);
     }

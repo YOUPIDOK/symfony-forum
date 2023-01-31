@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Speaker;
 use App\Entity\User;
+use App\Enum\UserRoleEnum;
 use App\Form\SpeakerType;
 use App\Repository\SpeakerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,7 @@ class SpeakerController extends AbstractController
     public function new(Request $request, SpeakerRepository $speakerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $speaker = new Speaker();
-        $form = $this->createForm(SpeakerType::class, $speaker);
+        $form = $this->createForm(SpeakerType::class, $speaker, ['required_password' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,6 +37,7 @@ class SpeakerController extends AbstractController
                 $hashedPassword = $passwordHasher->hashPassword($speaker->getUser(), $plainPassword);
                 $speaker->getUser()->setPassword($hashedPassword);
             }
+            $speaker->getUser()->addRole(UserRoleEnum::ROLE_SPEAKER);
             $speakerRepository->save($speaker, true);
 
 

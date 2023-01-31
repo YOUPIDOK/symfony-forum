@@ -35,6 +35,11 @@ class Student
     #[ORM\OneToMany(mappedBy: 'student', targetEntity: SurveyAnswer::class, cascade: ['remove'])]
     private Collection $surveyAnswers;
 
+    public function __toString(): string
+    {
+        return '' . $this->user?->getIdentity();
+    }
+
     public function __construct()
     {
         $this->surveyAnswers = new ArrayCollection();
