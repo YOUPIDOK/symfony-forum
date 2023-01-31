@@ -3,4 +3,15 @@
 {% block title %}{{ app.user.identity }}{% endblock %}
 
 {% block body %}
+    <h1>Mes inscription</h1>
+    {% for reservation in app.user.student.workshopReservations %}
+        <div>
+            {{ reservation.workshop.name }} :
+            du {{ reservation.workshop.startAt | date('d/m/y H:i')}}
+            au {{ reservation.workshop.endAt | date('d/m/y H:i') }}
+        </div>
+    {% else %}
+        Aucune inscription pour le moment
+        <a href="{{ path('workshops') }}">Voir les ateliers</a>
+    {% endfor %}
 {% endblock %}

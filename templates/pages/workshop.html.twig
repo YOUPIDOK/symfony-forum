@@ -8,8 +8,6 @@
     <div>Fin : {{ workshop.endAt | date('d/m/y H:i') }}</div>
     <div>Secteur : {{ workshop.sector.name }}</div>
 
-    <div></div>
-
     {% if workshop.room is not null %}
         <div>
             <div>{{ workshop.room.name }} - Étage {{ workshop.room.floor }}</div>
@@ -42,4 +40,7 @@
         {% endfor %}
     </div>
 
+    {% if canAddReservation %}
+        <a class="p-4" href="{{ path('workshop_reservation', {id: workshop.id}) }}">S'inscire</a>
+    {% endif %}
 {% endblock %}

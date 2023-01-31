@@ -35,6 +35,9 @@ class Student
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\OneToMany(mappedBy: 'student', targetEntity: WorkshopReservation::class, cascade: ['remove'])]
+    private Collection $workshopReservations;
+
     public function __toString(): string
     {
         return '' . $this->user?->getIdentity();
@@ -43,6 +46,7 @@ class Student
     public function __construct()
     {
         $this->surveyAnswers = new ArrayCollection();
+        $this->workshopReservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,6 +116,36 @@ class Student
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WorkshopReservation>
+     */
+    public function getWorkshopReservations(): Collection
+    {
+        return $this->workshopReservations;
+    }
+
+    public function addWorkshopReservation(WorkshopReservation $workshopReservation): self
+    {
+        if (!$this->workshopReservations->contains($workshopReservation)) {
+            $this->workshopReservations->add($workshopReservation);
+            $workshopReservation->setStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshopReservation(WorkshopReservation $workshopReservation): self
+    {
+        if ($this->workshopReservations->removeElement($workshopReservation)) {
+            // set the owning side to null (unless already changed)
+            if ($workshopReservation->getStudent() === $this) {
+                $workshopReservation->setStudent(null);
+            }
+        }
 
         return $this;
     }

@@ -4,23 +4,30 @@ TODO :
         - Verify *
             - Show
             - Index
+
         - Ressource (A voir plus tard - pas le plus important)
             - vich file Resource
 
     - Public
         - Page accueil Vue
-        - Liste des ateliers
-        - Presentaion d'un atelier
+        - Liste des ateliers (Front)
+        - Presentaion d'un atelier (Front)
         - Inscription lyceen (Front)
-    - Page profil lyceen
+
+    - Page profil lyceen (Front)
+
+
     - Page profil lycee
-    - Monitoring d’inscription par lycée pour le forum en cours (pour l’admin ou le lycée concerné)
+        - tous les lycéen avec leur atelier
+
+    - Point d’entrée pour une API (sans authentification) pour récupérer le nombre d’inscrit par atelier et créneau
+        horaire
+
     - Monitoring d’inscription par atelier pour le forum en cours (pour l’admin ou le lycée concerné)
+
     - Page pour remplir le questionnaire (et chiffrement après validation des données)
     - Une commande pour assigner les salles aux ateliers suivant le nombre d’inscription et la capacité de la salle
     - Une commande pour chiffrer les données personnelles des élèves
-    - Point d’entrée pour une API (sans authentification) pour récupérer le nombre d’inscrit par atelier et créneau
-        horaire
 
 TODO ++ :
     - Question order

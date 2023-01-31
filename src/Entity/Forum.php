@@ -42,6 +42,11 @@ class Forum
         $this->surveys = new ArrayCollection();
     }
 
+    public function canAddReservation()
+    {
+        return $this->endAt > new DateTime('now');
+    }
+
     public function __toString(): string
     {
         return '' . $this->name;

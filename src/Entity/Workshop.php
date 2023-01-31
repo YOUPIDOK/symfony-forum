@@ -57,11 +57,15 @@ class Workshop
     #[Count(min: 1, minMessage: 'Minimum 1')]
     private Collection $jobs;
 
+    #[ORM\OneToMany(mappedBy: 'workshop', targetEntity: WorkshopReservation::class, cascade: ['remove'])]
+    private Collection $workshopReservations;
+
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
         $this->resources = new ArrayCollection();
         $this->jobs = new ArrayCollection();
+        $this->workshopReservations = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -214,6 +218,36 @@ class Workshop
     public function removeJob(Job $job): self
     {
         $this->jobs->removeElement($job);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WorkshopReservation>
+     */
+    public function getWorkshopReservations(): Collection
+    {
+        return $this->workshopReservations;
+    }
+
+    public function addWorkshopReservation(WorkshopReservation $workshopReservation): self
+    {
+        if (!$this->workshopReservations->contains($workshopReservation)) {
+            $this->workshopReservations->add($workshopReservation);
+            $workshopReservation->setWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshopReservation(WorkshopReservation $workshopReservation): self
+    {
+        if ($this->workshopReservations->removeElement($workshopReservation)) {
+            // set the owning side to null (unless already changed)
+            if ($workshopReservation->getWorkshop() === $this) {
+                $workshopReservation->setWorkshop(null);
+            }
+        }
 
         return $this;
     }
