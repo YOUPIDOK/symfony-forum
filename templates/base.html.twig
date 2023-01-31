@@ -12,6 +12,9 @@
         {% include "partials/_header.html.twig" %}  
         <main>
             {% include "partials/_flash_messages.html.twig" %}
+            {% if app.request.get('_route') starts with 'admin' %}
+                {% include "partials/_admin_header.html.twig" %}
+            {% endif %}
             {% block body %}{% endblock %}
         </main>
         {% include "partials/_footer.html.twig" %}

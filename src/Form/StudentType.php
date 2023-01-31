@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Student;
+use App\Enum\HighSchoolDegreeEnum;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,9 +15,12 @@ class StudentType extends AbstractType
     {
         $builder
             ->add('user', UserType::class)
-            ->add('degree')
-            ->add('highSchool')
-        ;
+            ->add('degree', ChoiceType::class, [
+                'label' => 'Classe',
+                'required' => true,
+                'choices' => HighSchoolDegreeEnum::getChoices()
+            ])
+            ->add('highSchool');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/survey/question')]
+#[Route('/admin/question')]
 class SurveyQuestionController extends AbstractController
 {
     #[Route('/', name: 'admin_survey_question_index', methods: ['GET'])]

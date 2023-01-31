@@ -1,0 +1,140 @@
+{{ dump(app.request.get('_route')) }}
+<ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+    <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin_forum_' ? 'page' : '' }}" 
+          href="{{ path('admin_forum_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Forums
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+          {{ app.request.get('_route') starts with 'admin_survey_' ? '
+              aria-current="page"
+              class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+          ' : '
+              class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+          ' }}
+          href="{{ path('admin_survey_index') }}" 
+        >
+            Formulaire
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+            {{ app.request.get('_route') starts with 'admin_survey_' ? '
+                aria-current="page"
+                class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+            ' : '
+                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+            ' }}
+            href="{{ path('admin_survey_question_index') }}" 
+        >
+            Question de Formulaire
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+            {{ app.request.get('_route') starts with 'admin_survey_' ? '
+                aria-current="page"
+                class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+            ' : '
+                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+            ' }}         
+            href="{{ path('admin_job_skill_index') }}"
+        >
+            Compétences
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+            {{ app.request.get('_route') starts with 'admin_survey_' ? '
+              aria-current="page"
+              class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+          ' : '
+              class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+          ' }}     
+            href="{{ path('admin_job_activity_index') }}"
+        >
+            Activités
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+            {{ app.request.get('_route') starts with 'admin_survey_' ? '
+                aria-current="page"
+                class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+            ' : '
+                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+            ' }}   
+            href="{{ path('admin_job_index') }}" 
+        >
+            Métiers
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin/' ? 'page' : '' }}" 
+          href="{{ path('admin_workshop_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Workshop
+        </a>
+    </li>
+    {# <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin/' ? 'page' : '' }}" 
+          href="{{ path('admin_workshop_sector_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Secteurs
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin/' ? 'page' : '' }}" 
+          href="{{ path('admin_company_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Entreprises
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin/' ? 'page' : '' }}" 
+          href="{{ path('admin_user_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Users
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin/' ? 'page' : '' }}" 
+          href="{{ path('admin_speaker_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Intervenants
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin/' ? 'page' : '' }}" 
+          href="{{ path('admin_student_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Étudiants
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin/' ? 'page' : '' }}" 
+          href="{{ path('admin_high_school_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Lycée
+        </a>
+    </li>
+    <li class="mr-2">
+        <a 
+          aria-current="{{ app.request.get('_route') starts with 'admin/' ? 'page' : '' }}" 
+          href="{{ path('admin_user_index') }}" 
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+            Utilisateurs
+        </a>
+    </li> #}
+</ul>
