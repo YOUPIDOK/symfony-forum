@@ -8,12 +8,7 @@ Format date crud
 
 CRUD
     - Users
-        - Students
-        - Speakers
         - Right
-        - Enable
-    - Job
     - Resource
     - Survey
     - Survey question
-    - Companies
