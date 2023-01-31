@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WorkshopSector index{% endblock %}
+
+{% block body %}
+    <h1>WorkshopSector index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for workshop_sector in workshop_sectors %}
+            <tr>
+                <td>{{ workshop_sector.id }}</td>
+                <td>{{ workshop_sector.name }}</td>
+                <td>{{ workshop_sector.description }}</td>
+                <td>
+                    <a href="{{ path('admin_workshop_sector_show', {'id': workshop_sector.id}) }}">show</a>
+                    <a href="{{ path('admin_workshop_sector_edit', {'id': workshop_sector.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_workshop_sector_new') }}">Create new</a>
+{% endblock %}
