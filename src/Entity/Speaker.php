@@ -22,7 +22,7 @@ class Speaker
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'speakers')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'speakers')]
     #[ORM\JoinColumn(nullable: false)]
     #[NotNull]
     private ?User $user = null;

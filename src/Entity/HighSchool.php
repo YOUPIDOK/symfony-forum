@@ -26,7 +26,7 @@ class HighSchool
     #[ORM\OneToMany(mappedBy: 'highSchool', targetEntity: Student::class, cascade: ['remove'])]
     private Collection $students;
 
-    #[ORM\ManyToOne(inversedBy: 'highSchools')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'highSchools')]
     private ?User $user = null;
 
     public function __construct()

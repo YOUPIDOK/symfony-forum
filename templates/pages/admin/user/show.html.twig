@@ -44,7 +44,7 @@
 
     {{ include('pages/admin/user/_delete_form.html.twig') }}
 
-    {% if not is_granted('ROLE_ADMIN') %}
+    {% if not user.hasRole('ROLE_ADMIN') %}
         <a href="{{ path('admin_user_allow_admin', {'id': user.id}) }}">Ajouter les droits admin</a>
     {% else %}
         <a href="{{ path('admin_user_disallow_admin', {'id': user.id}) }}">Supprimer les droits admin</a>

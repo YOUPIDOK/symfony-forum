@@ -3,14 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\HighSchool;
+use App\Entity\User;
 use App\Form\HighSchoolType;
 use App\Repository\HighSchoolRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/high/school')]
+#[Route('/admin/lycee')]
 class HighSchoolController extends AbstractController
 {
     #[Route('/', name: 'admin_high_school_index', methods: ['GET'])]
@@ -22,13 +24,18 @@ class HighSchoolController extends AbstractController
     }
 
     #[Route('/new', name: 'admin_high_school_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, HighSchoolRepository $highSchoolRepository): Response
+    public function new(Request $request, HighSchoolRepository $highSchoolRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $highSchool = new HighSchool();
         $form = $this->createForm(HighSchoolType::class, $highSchool);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $plainPassword = $form->get('user')->get('plainPassword')->getData();
+            if ($plainPassword != null) {
+                $hashedPassword = $passwordHasher->hashPassword($highSchool->getUser(), $plainPassword);
+                $highSchool->getUser()->setPassword($hashedPassword);
+            }
             $highSchoolRepository->save($highSchool, true);
 
             return $this->redirectToRoute('admin_high_school_index', [], Response::HTTP_SEE_OTHER);
@@ -49,12 +56,17 @@ class HighSchoolController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'admin_high_school_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, HighSchool $highSchool, HighSchoolRepository $highSchoolRepository): Response
+    public function edit(Request $request, HighSchool $highSchool, HighSchoolRepository $highSchoolRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(HighSchoolType::class, $highSchool);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $plainPassword = $form->get('user')->get('plainPassword')->getData();
+            if ($plainPassword != null) {
+                $hashedPassword = $passwordHasher->hashPassword($highSchool->getUser(), $plainPassword);
+                $highSchool->getUser()->setPassword($hashedPassword);
+            }
             $highSchoolRepository->save($highSchool, true);
 
             return $this->redirectToRoute('admin_high_school_index', [], Response::HTTP_SEE_OTHER);

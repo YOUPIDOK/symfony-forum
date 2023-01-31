@@ -127,6 +127,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $toString;
     }
 
+    public function hasRole(string $role): bool
+    {
+        return in_array(strtoupper($role), $this->roles, true);
+    }
+
+
     /**
      * A visual identifier that represents this user.
      *

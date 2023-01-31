@@ -21,23 +21,21 @@ class UserType extends AbstractType
             ->add('telephone')
         ;
 
-        if ($options['allow_password']) {
-            $builder->add('plainPassword', PasswordType::class, [
-                'label' =>'mot de passe',
-                'required' => $options['data']->getId() == null,
-                'mapped' => false,
-                'constraints' => [
-                    new Length(['min' => 8])
-                ]
-            ]);
-        }
+        $builder->add('plainPassword', PasswordType::class, [
+            'label' =>'mot de passe',
+            'required' => empty($options['data']) || $options['data']->getId() == null,
+            'mapped' => false,
+            'constraints' => [
+                new Length(['min' => 8])
+            ]
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'allow_password' => false
+            'label' => false
         ]);
     }
 }

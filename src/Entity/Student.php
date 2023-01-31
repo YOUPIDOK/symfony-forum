@@ -20,11 +20,12 @@ class Student
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'students')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'students')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'students')]
+    #[NotNull]
     private ?HighSchool $highSchool = null;
 
     #[ORM\Column(length: 50)]
