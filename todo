@@ -1,10 +1,8 @@
-user
-
-slug
 vich file Resource
 
 Flash messages
-Navbar
+
+Format date crud
 
 CRUD
     - Users
@@ -15,7 +13,6 @@ CRUD
     - Job
     - Job Activity
     - Job Skill
-    - Forum
     - Sector
     - Workshop
     - Resource
@@ -23,4 +20,3 @@ CRUD
     - Survey question
     - Survey answer
     - Companies
-

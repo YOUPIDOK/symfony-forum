@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <a href="{{ path('admin_forum_index') }}">Forums</a>
+    <a href="{{ path('admin_job_skill_index') }}">Compétences</a>
+{% endblock %}

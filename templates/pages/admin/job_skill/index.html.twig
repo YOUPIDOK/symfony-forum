@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}JobSkill index{% endblock %}
+
+{% block body %}
+    <h1>JobSkill index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for job_skill in job_skills %}
+            <tr>
+                <td>{{ job_skill.id }}</td>
+                <td>{{ job_skill.name }}</td>
+                <td>
+                    <a href="{{ path('admin_job_skill_show', {'id': job_skill.id}) }}">show</a>
+                    <a href="{{ path('admin_job_skill_edit', {'id': job_skill.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_job_skill_new') }}">Create new</a>
+{% endblock %}
