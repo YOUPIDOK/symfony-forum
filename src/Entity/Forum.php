@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ForumRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,6 +29,12 @@ class Forum
 
     #[ORM\OneToMany(mappedBy: 'forum', targetEntity: Survey::class, cascade: ['remove'])]
     private Collection $surveys;
+
+    #[ORM\Column]
+    private ?DateTime $startAt = null;
+
+    #[ORM\Column]
+    private ?DateTime $endAt = null;
 
     public function __construct()
     {
@@ -113,6 +120,30 @@ class Forum
                 $survey->setForum(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStartAt(): ?DateTime
+    {
+        return $this->startAt;
+    }
+
+    public function setStartAt(DateTime $startAt): self
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    public function getEndAt(): ?DateTime
+    {
+        return $this->endAt;
+    }
+
+    public function setEndAt(DateTime $endAt): self
+    {
+        $this->endAt = $endAt;
 
         return $this;
     }
