@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\JobActivity;
 use App\Entity\Workshop;
+use App\Form\CustomType\EntitySelectChoicesType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

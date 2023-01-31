@@ -10,10 +10,17 @@ CRUD
     - Users
         - Students
         - Speakers
-        - Right
-        - Enable
-    - Job
+        - HighSchool
+        - User
+            - right
+            - Enable
+
     - Resource
+
     - Survey
     - Survey question
+
     - Companies
+
+    - High school profile
+    - User profile
