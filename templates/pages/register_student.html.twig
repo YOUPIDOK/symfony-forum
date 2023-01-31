@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte étudiant{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.user.email) }}
+        <button type="submit">Créer mon compte</button>
+    {{ form_end(form) }}
+
+{% endblock %}
