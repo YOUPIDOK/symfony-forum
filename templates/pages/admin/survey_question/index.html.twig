@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SurveyQuestion index{% endblock %}
+
+{% block body %}
+    <h1>SurveyQuestion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Question</th>
+                <th>Type</th>
+                <th>Survey</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for survey_question in survey_questions %}
+            <tr>
+                <td>{{ survey_question.id }}</td>
+                <td>{{ survey_question.question }}</td>
+                <td>{{ survey_question.type }}</td>
+                <td>{{ survey_question.survey }}</td>
+                <td>
+                    <a href="{{ path('admin_survey_question_show', {'id': survey_question.id}) }}">show</a>
+                    <a href="{{ path('admin_survey_question_edit', {'id': survey_question.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_survey_question_new') }}">Create new</a>
+{% endblock %}

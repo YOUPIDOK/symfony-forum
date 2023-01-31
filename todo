@@ -8,12 +8,7 @@ Format date crud
 
 CRUD
     - Users
-        - Students
-        - Speakers
-        - HighSchool
-        - User
-            - right
-
+        - Right
     - Resource
 
     - Survey
