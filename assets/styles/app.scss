@@ -5,6 +5,10 @@
 @import url("@fortawesome/fontawesome-free/css/all.min.css");
 @import "~choices.js/src/styles/choices";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: lightgray;
 }
