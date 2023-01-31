@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\WorkshopSectorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -25,6 +26,9 @@ class WorkshopSector
 
     #[ORM\OneToMany(mappedBy: 'sector', targetEntity: Workshop::class, cascade: ['remove'])]
     private Collection $workshops;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
 
     public function __construct()
     {
@@ -79,6 +83,18 @@ class WorkshopSector
                 $workshop->setSector(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
