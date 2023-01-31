@@ -35,6 +35,16 @@
                         <a href="{{ path('admin')}}" class="block py-2 pr-4 pl-3 text-dark rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white">Administration</a>
                     </li>
                 {% endif %}
+                {% if is_granted('ROLE_HIGH_SCHOOL') %}
+                    <li>
+                        <a href="{{ path('high_school_profile')}}" class="block py-2 pr-4 pl-3 text-dark rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white">Mon lycée</a>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_STUDENT') %}
+                    <li>
+                        <a href="{{ path('student_profile')}}" class="block py-2 pr-4 pl-3 text-dark rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white">Mon profil</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

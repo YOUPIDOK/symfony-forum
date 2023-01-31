@@ -7,12 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[IsGranted('ROLE_HIGH_SCHOOL')]
-class HighSchoolController extends AbstractController
+#[IsGranted('ROLE_STUDENT')]
+class StudentController extends AbstractController
 {
-    #[Route('/mon-lycée', name: 'high_school_profile')]
+    #[Route('/mon-profile', name: 'student_profile')]
     public function index(): Response
     {
-        return $this->render('pages/high_school_profile.html.twig', []);
+        return $this->render('pages/student_profile.html.twig', []);
     }
 }
