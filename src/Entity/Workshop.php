@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity(repositoryClass: WorkshopRepository::class)]
@@ -39,6 +40,7 @@ class Workshop
 
     #[ORM\ManyToMany(targetEntity: Speaker::class, inversedBy: 'workshops')]
     #[ORM\JoinTable(name: 'workshop_as_speaker')]
+    #[Count(min: 1, minMessage: 'Minimum 1')]
     private Collection $speakers;
 
     #[ORM\ManyToMany(targetEntity: Resource::class, inversedBy: 'workshops')]

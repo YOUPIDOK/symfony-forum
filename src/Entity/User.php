@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\UserRoleEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -65,6 +66,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getRolesValue()
+    {
+        $roles = [];
+
+        foreach ($this->roles as $role) {
+            $roles[] = UserRoleEnum::getRole($role);
+        }
+
+        return implode( ',', $roles);
+    }
+
+    public function removeRole(string $role): self
+    {
+        $roles = [];
+
+        foreach ($this->roles as $r) {
+            if ($r !== $role) {
+                $roles[] = $r;
+            }
+        }
+
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function getEmail(): ?string
