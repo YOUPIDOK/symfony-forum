@@ -1,14 +1,8 @@
 TODO :
     - migration
 
-    - CRUD Formulaire
-    - CRUD Question
-
     - Ressource (A voir plus tard - pas le plus important)
         - vich file Resource
-
-    - Public
-        - title page
 
     - Page pour remplir le questionnaire (et chiffrement après validation des données)
     - Une commande pour chiffrer les données personnelles des élèves
