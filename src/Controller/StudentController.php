@@ -7,6 +7,7 @@ use App\Form\SurveySubmitType;
 use App\Repository\ForumRepository;
 use App\Repository\WorkshopReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use HasherService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,7 @@ class StudentController extends AbstractController
     }
 
     #[Route(path: '/forumaire', name: 'survey', methods: ['POST', 'GET'])]
-    public function survey(ForumRepository $forumRepository, Request $request, EntityManagerInterface $em)
+    public function survey(ForumRepository $forumRepository, Request $request, EntityManagerInterface $em, HasherService $hasherService)
     {
         $forum = $forumRepository->findLastForum();
 
@@ -42,7 +43,7 @@ class StudentController extends AbstractController
             }
             $em->flush();
 
-            // TODO : Crypter
+            $hasherService->hashUser($this->getUser());
 
             $this->redirectToRoute('logout');
         }
