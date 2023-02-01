@@ -13,8 +13,8 @@ yarn build
 
 ## Commandes
 ```shell
-php bin/console workshop:assign-rooms # Assigner une salle aux ateliers
 php bin/console user:create # Créer un User
+php bin/console workshop:assign-rooms # Assigner une salle aux ateliers
 php bin/console hash:students # Hasher tous les étudiant non hashés
 ```
 

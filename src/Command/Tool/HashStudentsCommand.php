@@ -41,7 +41,7 @@ class HashStudentsCommand extends Command
 
         $this->em->flush();
 
-        $io->success("User hasher");
+        $io->success("Users has been hashed");
         
         return Command::SUCCESS;
     }
