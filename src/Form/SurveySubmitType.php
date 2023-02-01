@@ -5,8 +5,10 @@ namespace App\Form;
 use App\Entity\Company;
 use App\Entity\Survey;
 use App\Entity\SurveyAnswer;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,18 +21,17 @@ class SurveySubmitType extends AbstractType
         /** @var Survey $survey */
         $survey = $options['survey'];
 
-        $answers = [];
-
         foreach ($survey->getSurveyQuestions() as $surveyQuestion) {
-            $answers[] = (new SurveyAnswer())
+            $answer = (new SurveyAnswer())
                 ->setSurveyQuestion($surveyQuestion)
                 ->setStudent($this->security->getUser()->getStudent())
             ;
+
+            $builder->add('surveyAnswer' . $surveyQuestion->getId(), SurveyAnswerSubmitType::class, [
+                'data' => $answer,
+                'question' => $surveyQuestion
+            ]);
         }
-
-        dd($answers);
-
-        $builder->add('name');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
