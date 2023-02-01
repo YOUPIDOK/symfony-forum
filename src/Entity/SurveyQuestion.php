@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: SurveyQuestionRepository::class)]
 #[ORM\Table(name: 'survey_questions')]
-#[UniqueEntity('name')]
+#[UniqueEntity(fields: ['question', 'type', 'survey'])]
 class SurveyQuestion
 {
     #[ORM\Id]

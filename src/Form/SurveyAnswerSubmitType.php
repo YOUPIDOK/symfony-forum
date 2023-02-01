@@ -6,6 +6,7 @@ use App\Entity\Company;
 use App\Entity\SurveyAnswer;
 use App\Entity\SurveyQuestion;
 use App\Enum\SurveyQuestionTypeEnum;
+use App\Repository\SurveyAnswerRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -25,6 +26,10 @@ class SurveyAnswerSubmitType extends AbstractType
             $builder->add('answer',  IntegerType::class, [
                 'label' => $surveyQuestion->getQuestion(),
                 'required' => true,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 5,
+                ],
                 'constraints' => [
                     new Range(min: 0, max: 5)
                 ]
