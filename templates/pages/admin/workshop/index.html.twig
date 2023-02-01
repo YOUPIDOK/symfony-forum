@@ -46,8 +46,8 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ workshop.startAt ? workshop.startAt|date('d/m/Y H:i') : '' }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ workshop.endAt ? workshop.endAt|date('d/m/Y H:i') : '' }}</td>
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                        <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_workshop_show', {'id': workshop.id}) }}">show</a>
-                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ path('admin_workshop_edit', {'id': workshop.id}) }}">edit</a>
+                                        <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_workshop_show', {'id': workshop.id}) }}">voir</a>
+                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ path('admin_workshop_edit', {'id': workshop.id}) }}">modifier</a>
                                     </td>
                                 </tr>
                             {% else %}

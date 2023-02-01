@@ -20,7 +20,7 @@ class StudentController extends AbstractController
     public function index(StudentRepository $studentRepository): Response
     {
         return $this->render('pages/admin/student/index.html.twig', [
-            'students' => $studentRepository->findBy([], []),
+            'students' => $studentRepository->findAllNoHashed(),
         ]);
     }
 

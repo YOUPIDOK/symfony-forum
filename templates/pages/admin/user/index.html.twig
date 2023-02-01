@@ -58,8 +58,8 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ user.telephone }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : '' }}</td>
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                        <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_user_show', {'id': user.id}) }}">show</a>
-                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+                                        <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_user_show', {'id': user.id}) }}">voir</a>
+                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ path('admin_user_edit', {'id': user.id}) }}">modifier</a>
                                     </td>
                                 </tr>
                             {% else %}

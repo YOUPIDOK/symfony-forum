@@ -15,6 +15,7 @@ class HasherService
     $user->setTelephone(substr(md5($user->getTelephone()), 0, 10));
     $user->setFirstname(substr(md5($user->getFirstname()), 0, 10));
     $user->setLastname(substr(md5($user->getLastname()), 0, 10));
+    $user->setIsHashed(true);
 
     if ($flush) $this->em->flush();
   }

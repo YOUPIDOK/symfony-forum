@@ -54,6 +54,17 @@ class StudentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllNoHashed()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->innerJoin('s.user', 'user')
+            ->where('user.isHashed = FALSE')
+            ->orderBy('user.firstname', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Student[] Returns an array of Student objects
 //     */

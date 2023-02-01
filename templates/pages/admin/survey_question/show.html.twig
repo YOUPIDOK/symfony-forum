@@ -28,7 +28,7 @@
 
     <a href="{{ path('admin_survey_question_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('admin_survey_question_edit', {'id': survey_question.id}) }}">edit</a>
+    <a href="{{ path('admin_survey_question_edit', {'id': survey_question.id}) }}">modifier</a>
 
     {{ include('pages/admin/survey_question/_delete_form.html.twig') }}
 
@@ -41,7 +41,7 @@
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">Information de la question</p>
                 </div>
                 <div class="flex gap-2">
-                    <a class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ path('admin_survey_question_edit', {'id': survey_question.id}) }}">modifié</a>
+                    <a class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ path('admin_survey_question_edit', {'id': survey_question.id}) }}">modifier</a>
                     {{ include('pages/admin/survey_question/_delete_form.html.twig') }}
                 </div>
             </div>

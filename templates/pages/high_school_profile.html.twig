@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                            {% for student in app.user.highSchool.students %}
+                            {% for student in app.user.highSchool.students|filter(s => not s.user.isHashed)  %}
                                 <tr>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.id }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.degreeValue }}</td>

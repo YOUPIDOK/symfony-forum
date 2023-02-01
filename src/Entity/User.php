@@ -59,6 +59,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Speaker $speaker = null;
 
+    #[ORM\Column]
+    private ?bool $isHashed = false;
+
     public function __construct()
     {
     }
@@ -284,6 +287,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->speaker = $speaker;
+
+        return $this;
+    }
+
+    public function getIsHashed(): ?bool
+    {
+        return $this->isHashed;
+    }
+
+    public function setIsHashed(bool $isHashed): self
+    {
+        $this->isHashed = $isHashed;
 
         return $this;
     }

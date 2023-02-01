@@ -39,6 +39,17 @@ class HighSchoolRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllNoHashed()
+    {
+        return $this
+            ->createQueryBuilder('h')
+            ->innerJoin('h.user', 'user')
+            ->where('user.isHashed = FALSE')
+            ->orderBy('h.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return HighSchool[] Returns an array of HighSchool objects
 //     */

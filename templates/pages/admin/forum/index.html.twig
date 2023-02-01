@@ -50,8 +50,8 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ forum.startAt ? forum.startAt|date('d/m/Y H:i') : '' }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ forum.endAt ? forum.endAt|date('d/m/Y H:i') : '' }}</td>
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                        <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_forum_show', {'id': forum.id}) }}">show</a>
-                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ path('admin_forum_edit', {'id': forum.id}) }}">edit</a>
+                                        <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_forum_show', {'id': forum.id}) }}">voir</a>
+                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ path('admin_forum_edit', {'id': forum.id}) }}">modifier</a>
                                     </td>
                                 </tr>
                             {% else %}

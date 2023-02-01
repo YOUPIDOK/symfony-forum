@@ -20,7 +20,7 @@ class SpeakerController extends AbstractController
     public function index(SpeakerRepository $speakerRepository): Response
     {
         return $this->render('pages/admin/speaker/index.html.twig', [
-            'speakers' => $speakerRepository->findBy([], []),
+            'speakers' => $speakerRepository->findAllNoHashed(),
         ]);
     }
 

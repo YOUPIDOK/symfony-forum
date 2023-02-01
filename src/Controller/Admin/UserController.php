@@ -37,7 +37,7 @@ class UserController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('pages/admin/user/index.html.twig', [
-            'users' => $userRepository->findBy([], ['lastname' => 'ASC']),
+            'users' => $userRepository->findBy(['isHashed' => false], ['lastname' => 'ASC']),
         ]);
     }
 

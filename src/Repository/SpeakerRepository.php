@@ -39,6 +39,16 @@ class SpeakerRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllNoHashed()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->innerJoin('s.user', 'user')
+            ->where('user.isHashed = FALSE')
+            ->orderBy('user.firstname', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return Speaker[] Returns an array of Speaker objects
 //     */

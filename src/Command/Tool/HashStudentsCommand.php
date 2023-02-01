@@ -34,7 +34,9 @@ class HashStudentsCommand extends Command
         $students = $this->studentRepository->findAll();
 
         foreach ($students as $student) {
-            $this->hasherService->hashUser($student->getUser(), false);
+            if (!$student->getUser()->getIsHashed()) {
+                $this->hasherService->hashUser($student->getUser(), false);
+            }
         }
 
         $this->em->flush();
