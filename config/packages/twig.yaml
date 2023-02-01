@@ -1,6 +1,6 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
-    form_themes: ['tailwind_2_layout.html.twig']
+    form_themes: ['form_theme/custom_tailwindcss.html.twig']
 
 when@test:
     twig:
