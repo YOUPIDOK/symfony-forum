@@ -2,12 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Forum;
 use App\Form\SurveySubmitType;
 use App\Repository\ForumRepository;
 use App\Repository\WorkshopReservationRepository;
+use App\Services\HasherService;
 use Doctrine\ORM\EntityManagerInterface;
-use HasherService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
