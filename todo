@@ -1,6 +1,7 @@
 TODO :
     - doc
     - migration
+    - fixtures
 
     - Crud
         - Inscription
@@ -16,18 +17,10 @@ TODO :
         - Liste des ateliers (Front)
         - Presentaion d'un atelier (Front)
         - Inscription lyceen (Front)
-
     - Page profil lyceen (Front)
-
-
-    - Page profil lycee
-        - tous les lycéen avec leur atelier
-
-    - Point d’entrée pour une API (sans authentification) pour récupérer le nombre d’inscrit par atelier et créneau
-        horaire
+    - Page profil lycee (Front)
 
     - Monitoring d’inscription par atelier pour le forum en cours (pour l’admin ou le lycée concerné)
-
     - Page pour remplir le questionnaire (et chiffrement après validation des données)
     - Une commande pour assigner les salles aux ateliers suivant le nombre d’inscription et la capacité de la salle
     - Une commande pour chiffrer les données personnelles des élèves

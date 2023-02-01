@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Forum;
+use App\Entity\Student;
 use App\Entity\WorkshopReservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +39,17 @@ class WorkshopReservationRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByForumAndStudent(Forum $forum, Student $student)
+    {
+        return $this
+            ->createQueryBuilder('wr')
+            ->innerJoin('wr.workshop','workshop')
+            ->where('workshop.forum = :forum')->setParameter('forum', $forum)
+            ->andWhere('wr.student = :student') ->setParameter('student', $student)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

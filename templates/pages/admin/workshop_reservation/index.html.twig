@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WorkshopReservation index{% endblock %}
+
+{% block body %}
+    <h1>WorkshopReservation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for workshop_reservation in workshop_reservations %}
+            <tr>
+                <td>{{ workshop_reservation.id }}</td>
+                <td>
+                    <a href="{{ path('admin_workshop_reservation_show', {'id': workshop_reservation.id}) }}">show</a>
+                    <a href="{{ path('admin_workshop_reservation_edit', {'id': workshop_reservation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_workshop_reservation_new') }}">Create new</a>
+{% endblock %}

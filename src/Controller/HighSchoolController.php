@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,6 @@ class HighSchoolController extends AbstractController
     #[Route('/mon-lycée', name: 'high_school_profile')]
     public function index(): Response
     {
-        return $this->render('pages/high_school_profile.html.twig', []);
+        return $this->render('pages/high_school_profile.html.twig');
     }
 }

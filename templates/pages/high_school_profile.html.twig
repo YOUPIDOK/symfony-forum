@@ -3,4 +3,9 @@
 {% block title %}Mon lycée{% endblock %}
 
 {% block body %}
+    {% for student in app.user.highSchool.students %}
+        {{ student.degreeValue }} - {{ student.user.identity }}
+    {% else %}
+        Aucun élève pour le moment
+    {% endfor %}
 {% endblock %}

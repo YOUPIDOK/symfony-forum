@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Mes inscription</h1>
-    {% for reservation in app.user.student.workshopReservations %}
+    {% for reservation in reservations %}
         <div>
             {{ reservation.workshop.name }} :
             du {{ reservation.workshop.startAt | date('d/m/y H:i')}}

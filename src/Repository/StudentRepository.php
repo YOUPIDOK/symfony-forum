@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Forum;
+use App\Entity\HighSchool;
 use App\Entity\Student;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +39,19 @@ class StudentRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByHighSchool(HighSchool $highSchool)
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->innerJoin('s.workshopReservations', 'workshopReservation')
+            ->innerJoin('workshopReservation.workshop', 'workshop')
+            ->innerJoin('s.user', 'user')
+            ->where('s.highSchool = :highSchool')->setParameter('highSchool', $highSchool)
+            ->orderBy('user.firstname')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

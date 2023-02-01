@@ -37,6 +37,7 @@ class WorkshopController extends AbstractController
     ): Response
     {
         $canAddReservation = false;
+
         if ($this->isGranted('ROLE_STUDENT')) {
             $student = $this->getUser()->getStudent();
             $forum = $forumRepository->findLastForum();

@@ -54,6 +54,11 @@ class Student
         return $this->id;
     }
 
+    public function getDegreeValue()
+    {
+        return HighSchoolDegreeEnum::getDegree($this->degree);
+    }
+
     public function getHighSchool(): ?HighSchool
     {
         return $this->highSchool;
