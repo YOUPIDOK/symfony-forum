@@ -17,7 +17,7 @@ class WorkshopController extends AbstractController
     public function index(WorkshopRepository $workshopRepository): Response
     {
         return $this->render('pages/admin/workshop/index.html.twig', [
-            'workshops' => $workshopRepository->findAll(),
+            'workshops' => $workshopRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 

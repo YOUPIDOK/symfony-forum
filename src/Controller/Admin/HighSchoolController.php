@@ -20,7 +20,7 @@ class HighSchoolController extends AbstractController
     public function index(HighSchoolRepository $highSchoolRepository): Response
     {
         return $this->render('pages/admin/high_school/index.html.twig', [
-            'high_schools' => $highSchoolRepository->findAll(),
+            'high_schools' => $highSchoolRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 

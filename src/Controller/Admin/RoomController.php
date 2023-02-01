@@ -17,7 +17,7 @@ class RoomController extends AbstractController
     public function index(RoomRepository $roomRepository): Response
     {
         return $this->render('pages/admin/room/index.html.twig', [
-            'rooms' => $roomRepository->findAll(),
+            'rooms' => $roomRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 

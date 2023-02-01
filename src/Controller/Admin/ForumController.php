@@ -17,7 +17,7 @@ class ForumController extends AbstractController
     public function index(ForumRepository $forumRepository): Response
     {
         return $this->render('pages/admin/forum/index.html.twig', [
-            'forums' => $forumRepository->findAll(),
+            'forums' => $forumRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 
