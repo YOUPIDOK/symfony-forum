@@ -31,6 +31,9 @@
                                         Forum
                                     </th>
                                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Atelier
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                                         <span class="sr-only">actions</span>
                                     </th>
                                 </tr>
@@ -41,6 +44,7 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ workshop_reservation.id }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ workshop_reservation.student.user.identity }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ workshop_reservation.workshop.forum.name }}</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ workshop_reservation.workshop.name }}</td>
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                         <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_workshop_reservation_show', {'id': workshop_reservation.id}) }}">show</a>
                                         <a class="text-indigo-600 hover:text-indigo-900" href="{{ path('admin_workshop_reservation_edit', {'id': workshop_reservation.id}) }}">edit</a>
