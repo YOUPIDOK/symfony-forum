@@ -31,4 +31,42 @@
     <a href="{{ path('admin_survey_question_edit', {'id': survey_question.id}) }}">edit</a>
 
     {{ include('pages/admin/survey_question/_delete_form.html.twig') }}
+
+
+    <div class="p-4">
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div class="flex items-center justify-between px-4 py-5 sm:px-6">
+                <div>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Question de formulaire</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">Information de la question</p>
+                </div>
+                <div class="flex gap-2">
+                    <a class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ path('admin_survey_question_edit', {'id': survey_question.id}) }}">modifié</a>
+                    {{ include('pages/admin/survey_question/_delete_form.html.twig') }}
+                </div>
+            </div>
+            <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Id</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ survey_question.id }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Question</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ survey_question.question }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Type</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ survey_question.typeValue }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Formulaire</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ survey_question.survey }}</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        <a class="inline-block text-slate-600 hover:text-slate-900 mt-4" href="{{ path('admin_survey_question_index') }}">Retour à la liste</a>
+    </div>
 {% endblock %}
