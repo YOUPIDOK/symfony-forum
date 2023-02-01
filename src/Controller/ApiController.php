@@ -19,6 +19,7 @@ class ApiController extends AbstractController
 
         if ($forum !== null) {
             foreach ($forum->getWorkshops() as $workshop) {
+                $room = $workshop->getRoom();
                 $data[] = [
                     'workshop' => $workshop->getName(),
                     'sector' => $workshop->getSector()->getName(),
@@ -26,6 +27,7 @@ class ApiController extends AbstractController
                     'startAt'  => $workshop->getStartAt(),
                     'endAt'  => $workshop->getEndAt(),
                     'nbReservation'  => $workshop->getWorkshopReservations()->count(),
+                    'room' => $room  === null ? 'Non attribuée' : $room->getName() . ' ' . $room->getFloor()
                 ];
             }
         }
