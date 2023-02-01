@@ -3,10 +3,11 @@ TODO :
     - migration
     - fixtures
 
+    - remove forum (fix)
+
     - Crud
         - Verify *
             - Show
-            - Index
 
         - Ressource (A voir plus tard - pas le plus important)
             - vich file Resource
@@ -18,14 +19,8 @@ TODO :
         - Inscription lyceen (Front)
     - Page profil lyceen (Front)
     - Page profil lycee (Front)
+    - Page login (Front)
 
-    - Monitoring d’inscription par atelier pour le forum en cours (pour l’admin ou le lycée concerné)
     - Page pour remplir le questionnaire (et chiffrement après validation des données)
     - Une commande pour assigner les salles aux ateliers suivant le nombre d’inscription et la capacité de la salle
     - Une commande pour chiffrer les données personnelles des élèves
-
-TODO ++ :
-    - Question order
-    - Flash messages
-    - Pager
-    - Format date crud
