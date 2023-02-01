@@ -8,13 +8,8 @@ TODO :
         - vich file Resource
 
     - Public
-        - Page accueil Vue
         - Liste des ateliers (Front)
         - Presentaion d'un atelier (Front)
-        - Inscription lyceen (Front)
-    - Page profil lyceen (Front)
-    - Page profil lycee (Front)
-    - Page login (Front)
 
     - Page pour remplir le questionnaire (et chiffrement après validation des données)
     - Une commande pour chiffrer les données personnelles des élèves

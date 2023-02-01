@@ -26,6 +26,7 @@ class StudentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'label' => false,
             'required_password' => false,
             'data_class' => Student::class,
         ]);
