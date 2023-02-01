@@ -44,7 +44,7 @@ class StudentController extends AbstractController
 
             $hasherService->hashUser($this->getUser());
 
-            $this->redirectToRoute('logout');
+            return $this->redirectToRoute('logout');
         }
 
         return $this->render('pages/survey.html.twig', [

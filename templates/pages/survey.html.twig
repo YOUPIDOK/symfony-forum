@@ -5,12 +5,12 @@
 {% block body %}
     <div class="my-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <h1 class="text-lg font-medium leading-6 text-gray-900">Formulaire de satisfaction</h1>
+            <h1 class="text-lg font-medium leading-6 text-gray-900">Qu'avez-vous pensé du forum cette année ?</h1>
 
             <div class="my-4">
                 {{ form_start(form) }}
                     {{ form_widget(form) }}
-                    <button type="submit">Valider mes réponses</button>
+                    <button type="submit" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Valider mes réponses</button>
                 {{ form_end(form) }}
             </div>
         </div>
