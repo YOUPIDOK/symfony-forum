@@ -55,6 +55,6 @@
     {% if not user.hasRole('ROLE_ADMIN') %}
         <a href="{{ path('admin_user_allow_admin', {'id': user.id}) }}">Ajouter les droits admin</a>
     {% else %}
-        <a href="{{ path('admin_user_disallow_admin', {'id': user.id}) }}">Supprimer les droits admin</a>
+        <a href="{{ path('admin_user_disallow_admin', {'id': user.id}) }}">supprimer les droits admin</a>
     {% endif %}
 {% endblock %}

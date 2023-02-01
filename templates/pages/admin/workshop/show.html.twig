@@ -70,6 +70,16 @@
                         {% endfor %}
                         </dd>
                     </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Ressources</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            {% for resource in workshop.resources %}
+                                {% if resource.isUrl %}
+                                    <a href="{{ resource.url }}" target="_blank" class="inline-flex items-center rounded-full bg-indigo-600 px-3 py-0.5 my-1 text-sm font-medium text-white">{{ resource.name }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </dd>
+                    </div>
                 </dl>
             </div>
         </div>

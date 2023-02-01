@@ -1,6 +1,10 @@
 TODO :
     - migration
+    - prod
 
-    - Ressource (A voir plus tard - pas le plus important)
+    - Resource (A voir plus tard - pas le plus important)
         - vich file Resource
-    
+        - fixtures
+        - download
+            - admin
+            - front

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Resource{% endblock %}
+
+{% block body %}
+    <div class="p-4">
+        <h1 class="text-lg font-medium leading-6 text-gray-900">Créer une resource</h1>
+
+        <div class="my-4">
+            {{ include('pages/admin/resource/_form.html.twig') }}
+        </div>
+
+        <a class="inline-block text-slate-600 hover:text-slate-900 mt-4" href="{{ path('admin_resource_index') }}">Retour à la liste</a>
+    </div>
+{% endblock %}

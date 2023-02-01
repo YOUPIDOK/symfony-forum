@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Job;
 use App\Entity\JobActivity;
 use App\Entity\Forum;
+use App\Entity\Resource;
 use App\Entity\Room;
 use App\Entity\Speaker;
 use App\Entity\Workshop;
@@ -76,6 +77,11 @@ class WorkshopType extends AbstractType
                 'label' => 'Salle',
                 'class' => Room::class,
                 'required' => false,
+            ])->add('resources', EntitySelectChoicesType::class, [
+                'label' => 'Ressources',
+                'class' => Resource::class,
+                'required' => false,
+                'multiple' => true,
             ])
         ;
     }

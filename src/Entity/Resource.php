@@ -2,25 +2,26 @@
 
 namespace App\Entity;
 
+use App\Enum\ResourceTypeEnum;
 use App\Repository\ResourceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Count;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity(repositoryClass: ResourceRepository::class)]
 #[ORM\Table(name: 'resources')]
 class Resource
 {
-    const URL = 'URL';
-    const FILE = 'FILE';
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[NotNull]
     private ?string $type = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -29,9 +30,18 @@ class Resource
     #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'resources')]
     private Collection $workshops;
 
+    #[ORM\Column(length: 255)]
+    #[NotNull]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->workshops = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+       return '' . $this->name;
     }
 
     public function getId(): ?int
@@ -41,12 +51,12 @@ class Resource
 
     public function isUrl(): bool
     {
-        return $this->type === self::URL;
+        return $this->type === ResourceTypeEnum::URL;
     }
 
     public function isFile(): bool
     {
-        return $this->type === self::FILE;
+        return $this->type === ResourceTypeEnum::FILE;
     }
 
     public function getType(): ?string
@@ -59,6 +69,11 @@ class Resource
         $this->type = $type;
 
         return $this;
+    }
+
+    public function getTypeValue()
+    {
+        return ResourceTypeEnum::getType($this->type);
     }
 
     public function getUrl(): ?string
@@ -96,6 +111,18 @@ class Resource
         if ($this->workshops->removeElement($workshop)) {
             $workshop->removeResource($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

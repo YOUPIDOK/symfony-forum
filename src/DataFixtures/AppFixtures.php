@@ -8,6 +8,7 @@ use App\Entity\HighSchool;
 use App\Entity\Job;
 use App\Entity\JobActivity;
 use App\Entity\JobSkill;
+use App\Entity\Resource;
 use App\Entity\Room;
 use App\Entity\Speaker;
 use App\Entity\Student;
@@ -18,7 +19,9 @@ use App\Entity\SurveyQuestion;
 use App\Entity\WorkshopReservation;
 use App\Entity\WorkshopSector;
 use App\Enum\HighSchoolDegreeEnum;
+use App\Enum\ResourceTypeEnum;
 use App\Enum\SurveyQuestionTypeEnum;
+use App\Form\ResourceType;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -61,6 +64,7 @@ class AppFixtures extends Fixture
         $this->highSchools();
         $this->students();
         $this->workshops();
+        $this->resources();
         $this->workshopReservations();
     }
 
@@ -315,7 +319,7 @@ class AppFixtures extends Fixture
                 ->setForum($this->forum)
                 ->setSector($this->sectors[array_rand($this->sectors)])
                 ->setStartAt($startAt)
-                ->setEndAt((new DateTime($startAt->format('Y-m-d H:i:s')))->modify('-45 minutes'));
+                ->setEndAt((new DateTime($startAt->format('Y-m-d H:i:s')))->modify('+45 minutes'));
 
             $max = random_int(1, 3);
             for ($j = 0; $j < $max; $j++) {
@@ -334,6 +338,31 @@ class AppFixtures extends Fixture
             }
             $this->manager->persist($workshop);
             $this->workshops[] = $workshop;
+        }
+
+        $this->manager->flush();
+    }
+
+    private function resources()
+    {
+        dump('RESOURCES');
+
+        for ($i = 1; $i <= 10; $i++) {
+            $resource = (new Resource())
+                ->setName('Ressource ' . $i)
+                ->setType(ResourceTypeEnum::URL)
+                ->setUrl('https://repository-images.githubusercontent.com/458058/af6a9d00-9374-11e9-887c-917673d9fe68')
+            ;
+            $this->manager->persist($resource);
+            $this->manager->flush();
+
+            $max = random_int(0, 3);
+            for ($j = 1; $j < $max; $j++) {
+                $workshop = $this->workshops[array_rand($this->workshops)];
+                if (!$workshop->getResources()->contains($resource)) {
+                    $workshop->addResource($resource);
+                }
+            }
         }
 
         $this->manager->flush();
