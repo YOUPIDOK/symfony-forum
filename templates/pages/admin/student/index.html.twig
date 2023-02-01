@@ -3,33 +3,84 @@
 {% block title %}Student index{% endblock %}
 
 {% block body %}
-    <h1>Student index</h1>
+    <div class="p-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+                <h1 class="text-xl font-semibold text-gray-900">Étudiant</h1>
+                <p class="mt-2 text-sm text-gray-700">La liste de toutes les étudiants</p>
+            </div>
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                <a href="{{ path('admin_student_new') }}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Nouveau</a>
+            </div>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Degree</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for student in students %}
-            <tr>
-                <td>{{ student.id }}</td>
-                <td>{{ student.degree }}</td>
-                <td>
-                    <a href="{{ path('admin_student_show', {'id': student.id}) }}">show</a>
-                    <a href="{{ path('admin_student_edit', {'id': student.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('admin_student_new') }}">Create new</a>
+        <div class="mt-8 flex flex-col">
+            <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                    <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-300">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Id
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Nom
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Prénom
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Email
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Tel
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Lycée
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Classe
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Réservation d'ateliers
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        Créer à
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                        <span class="sr-only">actions</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                            {% for student in students %}
+                                <tr>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.id }}</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.user.lastname }}</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.user.firstname }}</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.user.email }}</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.user.telephone }}</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.high_school.name }}</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.degreeValue }}</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">{{ student.user.createdAt }}</td>
+                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_student_show', {'id': student.id}) }}">show</a>
+                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ path('admin_student_edit', {'id': student.id}) }}">edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">no records found</td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6"></td>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6"></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
