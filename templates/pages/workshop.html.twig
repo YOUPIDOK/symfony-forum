@@ -24,17 +24,19 @@
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.endAt ? workshop.endAt|date('d/m/Y H:i') : '' }}</dd>
                     </div>
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Sector</dt>
+                        <dt class="text-sm font-medium text-gray-500">Secteur</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.sector }}</dd>
                     </div>
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">Forum</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.forum }}</dd>
                     </div>
-                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Salle</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.room }}</dd>
-                    </div>
+                    {% if workshop.room is not empty %}
+                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Salle</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.room }}</dd>
+                        </div>
+                    {% endif %}
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">Intervenants</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
