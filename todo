@@ -5,13 +5,6 @@ TODO :
         - answer
         - survey
 
-    - replace date format
-
-    - Crud
-        - order
-        - Verify *
-            - Show
-
         - Ressource (A voir plus tard - pas le plus important)
             - vich file Resource
 
@@ -25,5 +18,4 @@ TODO :
     - Page login (Front)
 
     - Page pour remplir le questionnaire (et chiffrement après validation des données)
-    - Une commande pour assigner les salles aux ateliers suivant le nombre d’inscription et la capacité de la salle
     - Une commande pour chiffrer les données personnelles des élèves

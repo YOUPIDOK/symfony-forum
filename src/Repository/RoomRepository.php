@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Room;
 use App\Entity\Workshop;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,18 +41,16 @@ class RoomRepository extends ServiceEntityRepository
         }
     }
 
-    public function findRoomForWorkshop(Workshop $workshop)
+    public function findRoomForWorkshopbWithAvailableCapacity(Workshop $workshop)
     {
-        // Que la salle est dispo
-        // Que la date de la salle est Ok
-        // Que la taille de la salle soit la plus petite
-
         return $this
             ->createQueryBuilder('room')
-            ->where()
-            ->setMaxResults(1)
+            ->leftJoin('room.workshops', 'workshops')
+            ->where('room.available = TRUE')
+            ->andWhere('room.capacity >= :nbPerson')->setParameter('nbPerson', $workshop->getNbPersons())
+            ->orderBy('room.capacity', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
     }
 //    /**
 //     * @return Room[] Returns an array of Room objects

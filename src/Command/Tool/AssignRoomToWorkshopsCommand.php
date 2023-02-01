@@ -4,7 +4,9 @@ namespace App\Command\Tool;
 
 use App\Entity\Workshop;
 use App\Repository\ForumRepository;
+use App\Repository\RoomRepository;
 use App\Repository\WorkshopRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -23,7 +25,9 @@ class AssignRoomToWorkshopsCommand extends Command
 
     public function __construct(
         private ForumRepository $forumRepository,
-        private WorkshopRepository $workshopRepository
+        private WorkshopRepository $workshopRepository,
+        private RoomRepository $roomRepository,
+        private EntityManagerInterface $em
     ) {
         parent::__construct(self::CMD);
     }
@@ -46,10 +50,26 @@ class AssignRoomToWorkshopsCommand extends Command
             }
         });
 
-
-
         foreach ($workshops as $workshop) {
-            dump($workshop->getNbPersons() . ' ' . $workshop->getName());
+            $rooms = $this->roomRepository->findRoomForWorkshopbWithAvailableCapacity($workshop);
+            $availableRoom = null;
+
+            foreach ($rooms as $room) {
+                if (!$this->workshopRepository->isAlreadyUsedDuringThisTimeForThisRoom($room, $workshop->getStartAt(), $workshop->getEndAt())) {
+                    $availableRoom = $room;
+                    break;
+                }
+            }
+
+            if ($availableRoom != null) {
+                $workshop->setRoom($availableRoom);
+                $this->em->flush();
+
+                $io->text('L\'atelier ' . $workshop->getName() . ' (' . $workshop->getNbPersons(). ' personnes) a été assigné à la salle ' . $availableRoom->getName()
+                    . ' étage ' . $availableRoom->getFloor() . ' (' . $availableRoom->getCapacity() .  ' places)');
+            } else  {
+                $io->warning('Impossible de trouvé une salle disponible pour l\'atelier ' . $workshop->getName());
+            }
         }
 
         return Command::SUCCESS;

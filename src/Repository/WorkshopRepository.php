@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Forum;
+use App\Entity\Room;
 use App\Entity\Workshop;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -38,6 +40,22 @@ class WorkshopRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function isAlreadyUsedDuringThisTimeForThisRoom(Room $room, DateTime $startAt, DateTime $endAt): bool
+    {
+        return $this
+            ->createQueryBuilder('workshop')
+            ->where('workshop.room = :room')
+            ->andWhere('(workshop.startAt BETWEEN :startAt AND :endAt) OR (workshop.endAt BETWEEN :startAt AND :endAt)')
+            ->setParameters([
+                'startAt' => $startAt,
+                'endAt' => $endAt,
+                'room' => $room
+            ])
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult() !== null;
     }
 
 //    /**
