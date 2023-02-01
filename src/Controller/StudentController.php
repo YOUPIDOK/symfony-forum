@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Forum;
+use App\Form\SurveySubmitType;
 use App\Repository\ForumRepository;
 use App\Repository\WorkshopReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,13 +25,22 @@ class StudentController extends AbstractController
     }
 
     #[Route(path: '/forumaire', name: 'survey')]
-    public function survey(ForumRepository $forumRepository): void
+    public function survey(ForumRepository $forumRepository)
     {
-        // TODO : Can répondre
+        // TODO : Can répondre constraint
 
         $forum = $forumRepository->findLastForum();
 
+        $form = $this->createForm(SurveySubmitType::class, null, [
+            'survey' => $forum->getSurvey()
+        ]);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            dd($form->getData());
+        }
 
+        return $this->render('pages/survey.html.twig', [
+            'form' => $form
+        ]);
     }
 }
