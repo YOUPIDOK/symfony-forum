@@ -57,15 +57,15 @@
                         <dt class="text-sm font-medium text-gray-500">Métiers</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         {% for job in workshop.jobs %}
-                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ workshopReservations.job.name }}</span>
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ job.name }}</span>
                         {% endfor %}
                         </dd>
                     </div>
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">Réserver par</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                        {% for workshopReservation in workshop.workshopReservations %}
-                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ workshopReservations.user.identity }}</span>
+                        {% for workshop_reservation in workshop.workshopReservations %}
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ workshop_reservation.student.user.identity }}</span>
                         {% endfor %}
                         </dd>
                     </div>
