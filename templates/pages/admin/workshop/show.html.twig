@@ -77,6 +77,9 @@
                                 {% if resource.isUrl %}
                                     <a href="{{ resource.url }}" target="_blank" class="inline-flex items-center rounded-full bg-indigo-600 px-3 py-0.5 my-1 text-sm font-medium text-white">{{ resource.name }}</a>
                                 {% endif %}
+                                {% if resource.isFile %}
+                                    <a href="{{ path('file_download', {id: resource.id}) }}" target="_blank" class="inline-flex items-center rounded-full bg-indigo-600 px-3 py-0.5 my-1 text-sm font-medium text-white">{{ resource.name }}</a>
+                                {% endif %}
                             {% endfor %}
                         </dd>
                     </div>
