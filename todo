@@ -8,8 +8,7 @@ TODO :
         - vich file Resource
 
     - Public
-        - Liste des ateliers (Front)
-        - Presentaion d'un atelier (Front)
+        - title page
 
     - Page pour remplir le questionnaire (et chiffrement après validation des données)
     - Une commande pour chiffrer les données personnelles des élèves

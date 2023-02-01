@@ -49,7 +49,6 @@ class Workshop
 
     #[ORM\ManyToOne(inversedBy: 'workshops')]
     #[ORM\JoinColumn(nullable: true)]
-
     private ?Room $room = null;
 
     #[ORM\ManyToMany(targetEntity: Job::class, inversedBy: 'workshops')]

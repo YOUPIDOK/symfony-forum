@@ -3,41 +3,75 @@
 {% block title %}Atelier {{ workshop.name }}{% endblock %}
 
 {% block body %}
-    <div>{{ workshop.name }}</div>
-    <div>Début : {{ workshop.startAt | date('d/m/y H:i') }}</div>
-    <div>Fin : {{ workshop.endAt | date('d/m/y H:i') }}</div>
-    <div>Secteur : {{ workshop.sector.name }}</div>
-
-    {% if workshop.room is not null %}
-        <div>
-            <div>{{ workshop.room.name }} - Étage {{ workshop.room.floor }}</div>
-            <div>{{ workshop.room.capacity }} personnes</div>
+    <div class="p-4">
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div class="flex items-center justify-between px-4 py-5 sm:px-6">
+                <div>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">{{ workshop.name }}</h3>
+                    {% if workshop.room is not null %}
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ workshop.room.capacity }} personnes max</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Commance à</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.startAt ? workshop.startAt|date('d/m/Y H:i') : '' }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Se termine à</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.endAt ? workshop.endAt|date('d/m/Y H:i') : '' }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Sector</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.sector }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Forum</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.forum }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Salle</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ workshop.room }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Intervenants</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% for speaker in workshop.speakers %}
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ speaker.user.identity }}</span>
+                        {% endfor %}
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Métiers</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% for job in workshop.jobs %}
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ job.name }}</span>
+                        {% endfor %}
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Compétances</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% for skill in jobSkills %}
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ skill.name }}</span>
+                        {% endfor %}
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Activités</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% for activity in jobActivities %}
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ activity.name }}</span>
+                        {% endfor %}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
         </div>
-        {# TODO : nb inscrit #}
-    {% endif %}
 
-    <div>
-        {% for speaker in workshop.speakers %}
-            <div>{{ speaker.user.identity }}</div>
-        {% endfor %}
-    </div>
-
-    <div>
-        {% for job in workshop.jobs %}
-            <div>{{ job.name }}</div>
-        {% endfor %}
-    </div>
-
-    <div>
-        {% for activity in jobActivities %}
-            <div>{{ activity.name }}</div>
-        {% endfor %}
-    </div>
-
-    <div>
-        {% for skill in jobSkills %}
-            <div>{{ skill.name }}</div>
-        {% endfor %}
+        <a class="inline-block text-slate-600 hover:text-slate-900 mt-4" href="{{ path('workshops') }}">Retour à la liste</a>
     </div>
 
     {% if canAddReservation %}
