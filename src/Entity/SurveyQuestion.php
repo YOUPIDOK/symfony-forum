@@ -25,12 +25,11 @@ class SurveyQuestion
     #[ORM\Column(length: 50)]
     private ?string $type = SurveyQuestionTypeEnum::OPEN;
 
-    #[ORM\ManyToOne(inversedBy: 'surveyQuestions')]
-    #[ORM\Column(nullable: true)]
-    private ?Survey $survey = null;
-
     #[ORM\OneToMany(mappedBy: 'surveyQuestion', targetEntity: SurveyAnswer::class, cascade: ['remove'])]
     private Collection $surveyAnswers;
+
+    #[ORM\ManyToOne(inversedBy: 'surveyQuestions')]
+    private ?Survey $survey = null;
 
     public function __construct()
     {
@@ -45,6 +44,11 @@ class SurveyQuestion
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTypeValue()
+    {
+        return SurveyQuestionTypeEnum::getType($this->type);
     }
 
     public function getQuestion(): ?string
@@ -67,18 +71,6 @@ class SurveyQuestion
     public function setType(?string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getSurvey(): ?Survey
-    {
-        return $this->survey;
-    }
-
-    public function setSurvey(?Survey $survey): self
-    {
-        $this->survey = $survey;
 
         return $this;
     }
@@ -109,6 +101,18 @@ class SurveyQuestion
                 $surveyAnswer->setSurveyQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSurvey(): ?Survey
+    {
+        return $this->survey;
+    }
+
+    public function setSurvey(?Survey $survey): self
+    {
+        $this->survey = $survey;
 
         return $this;
     }

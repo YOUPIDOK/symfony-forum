@@ -13,7 +13,6 @@ class SurveyType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('forum')
         ;
     }
 

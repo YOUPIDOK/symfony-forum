@@ -1,12 +1,11 @@
 TODO :
     - migration
-    - fixtures
-        - question
-        - answer
-        - survey
 
-        - Ressource (A voir plus tard - pas le plus important)
-            - vich file Resource
+    - CRUD Formulaire
+    - CRUD Question
+
+    - Ressource (A voir plus tard - pas le plus important)
+        - vich file Resource
 
     - Public
         - Page accueil Vue

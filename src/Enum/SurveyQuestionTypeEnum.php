@@ -4,8 +4,8 @@ namespace App\Enum;
 
 class SurveyQuestionTypeEnum
 {
-    const OPEN = 'SECOND';
-    const CLOSE = 'FIRST';
+    const OPEN = 'OPEN';
+    const CLOSE = 'CLOSE';
     const INTERVAL = 'INTERVAL';
 
     public static array $types = [

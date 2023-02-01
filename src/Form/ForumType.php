@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Forum;
+use App\Entity\JobActivity;
+use App\Entity\Survey;
+use App\Form\CustomType\EntitySelectChoicesType;
 use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -46,6 +49,11 @@ class ForumType extends AbstractType
                         }
                     ])
                 ]
+            ])
+            ->add('survey', EntitySelectChoicesType::class, [
+                'label' => 'Formulaire',
+                'required' => false,
+                'class' => Survey::class,
             ])
         ;
     }

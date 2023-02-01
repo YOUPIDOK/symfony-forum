@@ -27,19 +27,19 @@ class Forum
     #[ORM\OneToMany(mappedBy: 'forum', targetEntity: Workshop::class, cascade: ['remove'])]
     private Collection $workshops;
 
-    #[ORM\OneToMany(mappedBy: 'forum', targetEntity: Survey::class, cascade: ['remove'])]
-    private Collection $surveys;
-
     #[ORM\Column]
     private ?DateTime $startAt = null;
 
     #[ORM\Column]
     private ?DateTime $endAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'forums')]
+    #[NotNull]
+    private ?Survey $survey = null;
+
     public function __construct()
     {
         $this->workshops = new ArrayCollection();
-        $this->surveys = new ArrayCollection();
     }
 
     public function canAddReservation()
@@ -99,36 +99,6 @@ class Forum
         return $this;
     }
 
-    /**
-     * @return Collection<int, Survey>
-     */
-    public function getSurveys(): Collection
-    {
-        return $this->surveys;
-    }
-
-    public function addSurvey(Survey $survey): self
-    {
-        if (!$this->surveys->contains($survey)) {
-            $this->surveys->add($survey);
-            $survey->setForum($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSurvey(Survey $survey): self
-    {
-        if ($this->surveys->removeElement($survey)) {
-            // set the owning side to null (unless already changed)
-            if ($survey->getForum() === $this) {
-                $survey->setForum(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getStartAt(): ?DateTime
     {
         return $this->startAt;
@@ -149,6 +119,18 @@ class Forum
     public function setEndAt(DateTime $endAt): self
     {
         $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    public function getSurvey(): ?Survey
+    {
+        return $this->survey;
+    }
+
+    public function setSurvey(?Survey $survey): self
+    {
+        $this->survey = $survey;
 
         return $this;
     }

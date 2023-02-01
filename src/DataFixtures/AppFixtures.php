@@ -11,11 +11,14 @@ use App\Entity\JobSkill;
 use App\Entity\Room;
 use App\Entity\Speaker;
 use App\Entity\Student;
+use App\Entity\Survey;
 use App\Entity\User;
 use App\Entity\Workshop;
+use App\Entity\SurveyQuestion;
 use App\Entity\WorkshopReservation;
 use App\Entity\WorkshopSector;
 use App\Enum\HighSchoolDegreeEnum;
+use App\Enum\SurveyQuestionTypeEnum;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -23,6 +26,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+
     public function __construct(private UserPasswordHasherInterface $userPasswordHasher) { }
 
     private ObjectManager $manager;
@@ -36,11 +40,15 @@ class AppFixtures extends Fixture
     private array         $highSchools = [];
     private array         $students = [];
     private array         $jobs = [];
+    private Survey        $survey;
+
 
     public function load(ObjectManager $manager): void
     {
         $this->manager = $manager;
 
+        $this->surveys();
+        $this->questions();
         $this->forums();
         $this->activities();
         $this->skills();
@@ -56,11 +64,40 @@ class AppFixtures extends Fixture
         $this->workshopReservations();
     }
 
+    private function surveys()
+    {
+        dump('SURVEYS');
+        $survey = (new Survey())->setName('Formulaire 2023');
+
+        $this->manager->persist($survey);
+        $this->manager->flush();
+
+        $this->survey = $survey;
+    }
+
+    private function questions()
+    {
+        dump('QUESTIONS');
+        $questionTypes = SurveyQuestionTypeEnum::getChoices();
+
+        for ($i = 1; $i <= 10; $i++) {
+            $question = (new SurveyQuestion())
+                ->setSurvey($this->survey)
+                ->setType($questionTypes[array_rand($questionTypes)])
+                ->setQuestion('Question ' . $i);
+
+            $this->manager->persist($question);
+        }
+
+        $this->manager->flush();
+    }
+
     private function forums()
     {
         dump('FORUMS');
         $forum = (new Forum())
             ->setName('Forum 2023')
+            ->setSurvey($this->survey)
             ->setStartAt(new DateTime('2023-02-25 10:00:00'))
             ->setEndAt(new DateTime('2023-03-25 18:00:00'));
 

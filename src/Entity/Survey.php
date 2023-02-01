@@ -23,15 +23,15 @@ class Survey
     #[NotNull]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'surveys')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Forum $forum = null;
+    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Forum::class)]
+    private Collection $forums;
 
-    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: SurveyQuestion::class, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: SurveyQuestion::class)]
     private Collection $surveyQuestions;
 
     public function __construct()
     {
+        $this->forums = new ArrayCollection();
         $this->surveyQuestions = new ArrayCollection();
     }
 
@@ -57,14 +57,32 @@ class Survey
         return $this;
     }
 
-    public function getForum(): ?Forum
+    /**
+     * @return Collection<int, Forum>
+     */
+    public function getForums(): Collection
     {
-        return $this->forum;
+        return $this->forums;
     }
 
-    public function setForum(?Forum $forum): self
+    public function addForum(Forum $forum): self
     {
-        $this->forum = $forum;
+        if (!$this->forums->contains($forum)) {
+            $this->forums->add($forum);
+            $forum->setSurvey($this);
+        }
+
+        return $this;
+    }
+
+    public function removeForum(Forum $forum): self
+    {
+        if ($this->forums->removeElement($forum)) {
+            // set the owning side to null (unless already changed)
+            if ($forum->getSurvey() === $this) {
+                $forum->setSurvey(null);
+            }
+        }
 
         return $this;
     }

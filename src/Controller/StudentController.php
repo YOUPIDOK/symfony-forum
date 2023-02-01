@@ -22,4 +22,15 @@ class StudentController extends AbstractController
             'reservations' => $workshopReservationRepository->findByForumAndStudent($forum, $this->getUser()->getStudent())
         ]);
     }
+
+    #[Route(path: '/forumaire', name: 'survey')]
+    public function survey(ForumRepository $forumRepository): void
+    {
+        // TODO : Can répondre
+
+        $forum = $forumRepository->findLastForum();
+
+
+
+    }
 }

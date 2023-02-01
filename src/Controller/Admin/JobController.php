@@ -17,7 +17,7 @@ class JobController extends AbstractController
     public function index(JobRepository $jobRepository): Response
     {
         return $this->render('pages/admin/job/index.html.twig', [
-            'jobs' => $jobRepository->findAll(),
+            'jobs' => $jobRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 
