@@ -23,9 +23,29 @@ class ResourceController extends AbstractController
     }
 
     #[Route('/new-url', name: 'admin_resource_new_url', methods: ['GET', 'POST'])]
-    public function new(Request $request, ResourceRepository $resourceRepository): Response
+    public function newUrl(Request $request, ResourceRepository $resourceRepository): Response
     {
         $resource = (new Resource())->setType(ResourceTypeEnum::URL);
+
+        $form = $this->createForm(ResourceType::class, $resource);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $resourceRepository->save($resource, true);
+
+            return $this->redirectToRoute('admin_resource_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('pages/admin/resource/new.html.twig', [
+            'resource' => $resource,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/new-file', name: 'admin_resource_new_file', methods: ['GET', 'POST'])]
+    public function newFile(Request $request, ResourceRepository $resourceRepository): Response
+    {
+        $resource = (new Resource())->setType(ResourceTypeEnum::FILE);
 
         $form = $this->createForm(ResourceType::class, $resource);
         $form->handleRequest($request);

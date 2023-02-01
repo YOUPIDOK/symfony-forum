@@ -25,12 +25,15 @@ use App\Form\ResourceType;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
 
-    public function __construct(private UserPasswordHasherInterface $userPasswordHasher) { }
+    public function __construct(private UserPasswordHasherInterface $userPasswordHasher, private ParameterBagInterface $parameterBag) { }
 
     private ObjectManager $manager;
     private Forum         $forum;
@@ -353,6 +356,31 @@ class AppFixtures extends Fixture
                 ->setType(ResourceTypeEnum::URL)
                 ->setUrl('https://repository-images.githubusercontent.com/458058/af6a9d00-9374-11e9-887c-917673d9fe68')
             ;
+            $this->manager->persist($resource);
+            $this->manager->flush();
+
+            $max = random_int(0, 3);
+            for ($j = 1; $j < $max; $j++) {
+                $workshop = $this->workshops[array_rand($this->workshops)];
+                if (!$workshop->getResources()->contains($resource)) {
+                    $workshop->addResource($resource);
+                }
+            }
+        }
+
+        for ($i = 11; $i <= 20; $i++) {
+            $originalName = 'fake-image.jpeg';
+            $fakeImagePath = $this->parameterBag->get('kernel.project_dir') . '/' . $originalName;
+            $fileName =  uniqid(rand()) . '.jpeg';
+            $filePath = $this->parameterBag->get('kernel.project_dir') . '/data/resources/' .  $fileName;
+            copy($fakeImagePath, $filePath);
+
+            $resource = (new Resource())
+                ->setName('Ressource ' . $i)
+                ->setType(ResourceTypeEnum::FILE)
+                ->setFilename($fileName)
+                ->setOriginalName($originalName);
+
             $this->manager->persist($resource);
             $this->manager->flush();
 

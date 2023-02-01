@@ -1,4 +1,5 @@
 .idea/
+/data/resources/
 
 ###> symfony/framework-bundle ###
 /.env.local

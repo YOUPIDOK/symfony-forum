@@ -4,17 +4,26 @@ namespace App\Entity;
 
 use App\Enum\ResourceTypeEnum;
 use App\Repository\ResourceRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Count;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use phpDocumentor\Reflection\Types\Self_;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ResourceRepository::class)]
 #[ORM\Table(name: 'resources')]
+#[UniqueEntity(fields: ['name', 'type'])]
+#[Vich\Uploadable]
 class Resource
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -33,6 +42,15 @@ class Resource
     #[ORM\Column(length: 255)]
     #[NotNull]
     private ?string $name = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $filename = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $originalName = null;
+
+    #[Vich\UploadableField(mapping: 'resource_file', fileNameProperty: 'filename', originalName: 'originalName')]
+    private ?File $file = null;
 
     public function __construct()
     {
@@ -126,4 +144,45 @@ class Resource
 
         return $this;
     }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): self
+    {
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getOriginalName(): ?string
+    {
+        return $this->originalName;
+    }
+
+    public function setOriginalName(?string $originalName): self
+    {
+        $this->originalName = $originalName;
+
+        return $this;
+    }
+
+    public function setFile(?File $file = null): self
+    {
+        $this->file = $file;
+
+        if (null !== $file) {
+            $this->setUpdatedAt(new DateTime());
+        }
+
+        return $this;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
 }
