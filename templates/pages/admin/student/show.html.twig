@@ -39,24 +39,16 @@
                     </div>
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">Lycée</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ student.high_school.name }}</dd>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ student.highSchool.name }}</dd>
                     </div>
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">Classe</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ student.degreeValue }}</dd>
                     </div>
-                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Réservation d'ateliers</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                        {% for workshopReservation in student.workshopReservations %}
-                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ workshopReservations.workshop.name }}</span>
-                        {% endfor %}
-                        </dd>
-                    </div>
                 </dl>
             </div>
         </div>
 
-        <a class="inline-block text-slate-600 hover:text-slate-900 mt-4" href="{{ path('admin_student_index') }}">back to list</a>
+        <a class="inline-block text-slate-600 hover:text-slate-900 mt-4" href="{{ path('admin_student_index') }}">Retour à la liste</a>
     </div>
 {% endblock %}
