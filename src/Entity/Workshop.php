@@ -68,6 +68,11 @@ class Workshop
         $this->workshopReservations = new ArrayCollection();
     }
 
+    public function getNbPersons()
+    {
+        return $this->getWorkshopReservations()->count() + $this->getSpeakers()->count();
+    }
+
     public function __toString(): string
     {
         return '' . $this->name;

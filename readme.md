@@ -5,10 +5,16 @@
 ```shell
 composer install
 php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force
+php bin/console doctrine:migrations:migrate 
 php bin/console doctrine:fixtures:load          # Peut prendre un peux de temps avec le hashage des mots de passe
 yarn install
 yarn build
+```
+
+## Commandes
+```shell
+php bin/console workshop:assign-rooms # Assigner une salle aux ateliers
+php bin/console user:create # Créer un User
 ```
 
 ## Api

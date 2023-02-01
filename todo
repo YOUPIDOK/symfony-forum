@@ -1,11 +1,14 @@
 TODO :
-    - doc
     - migration
     - fixtures
+        - question
+        - answer
+        - survey
 
-    - remove forum (fix)
+    - replace date format
 
     - Crud
+        - order
         - Verify *
             - Show
 
