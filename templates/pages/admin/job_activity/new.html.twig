@@ -3,9 +3,13 @@
 {% block title %}New JobActivity{% endblock %}
 
 {% block body %}
-    <h1>Create new JobActivity</h1>
+    <div class="p-4">
+        <h1 class="text-lg font-medium leading-6 text-gray-900">Créer une nouvelle activité de métier</h1>
 
-    {{ include('pages/admin/job_activity/_form.html.twig') }}
+        <div class="my-4">
+            {{ include('pages/admin/job_activity/_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('admin_job_activity_index') }}">back to list</a>
+        <a class="inline-block text-slate-600 hover:text-slate-900 mt-4" href="{{ path('admin_job_activity_index') }}">back to list</a>
+    </div>
 {% endblock %}

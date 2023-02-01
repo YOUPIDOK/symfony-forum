@@ -11,7 +11,7 @@
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">Information du forum</p>
                 </div>
                 <div class="flex gap-2">
-                    <a class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ path('admin_forum_edit', {'id': forum.id}) }}">edit</a>
+                    <a class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ path('admin_forum_edit', {'id': forum.id}) }}">modifié</a>
                     {{ include('pages/admin/forum/_delete_form.html.twig') }}
                 </div>
             </div>
@@ -22,21 +22,29 @@
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ forum.id }}</dd>
                     </div>
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Name</dt>
+                        <dt class="text-sm font-medium text-gray-500">Nom</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ forum.name }}</dd>
                     </div>
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">StartAt</dt>
+                        <dt class="text-sm font-medium text-gray-500">Date de début</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ forum.startAt ? forum.startAt|date('Y-m-d H:i:s') : '' }}</dd>
                     </div>
                     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">EndAt</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">${{ forum.endAt ? forum.endAt|date('Y-m-d H:i:s') : '' }}</dd>
+                        <dt class="text-sm font-medium text-gray-500">Date de fin</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ forum.endAt ? forum.endAt|date('Y-m-d H:i:s') : '' }}</dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Ateliers</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% for workshop in forum.workshops %}
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 my-1 text-sm font-medium text-gray-800">{{ workshop.name }}</span>
+                        {% endfor %}
+                        </dd>
                     </div>
                 </dl>
             </div>
         </div>
 
-        <a class="text-slate-600 hover:text-slate-900 mr-4" href="{{ path('admin_forum_index') }}">back to list</a>
+        <a class="inline-block text-slate-600 hover:text-slate-900 mt-4" href="{{ path('admin_forum_index') }}">back to list</a>
     </div>
 {% endblock %}
