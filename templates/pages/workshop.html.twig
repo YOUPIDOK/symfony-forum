@@ -86,10 +86,14 @@
             </div>
         </div>
 
-        <a class="inline-block text-slate-600 hover:text-slate-900 mt-4" href="{{ path('workshops') }}">Retour à la liste</a>
+        {% if canAddReservation %}
+            <div class="mt-4">
+                <a class="inline-flex items-center rounded-md border border-transparent bg-cyan-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2" href="{{ path('workshop_reservation', {id: workshop.id}) }}">S'inscire</a>
+            </div>
+        {% endif %}
+        <div class="mt-4">
+            <a class="inline-block text-slate-600 hover:text-slate-900" href="{{ path('workshops') }}">Retour à la liste</a>
+        </div>
     </div>
 
-    {% if canAddReservation %}
-        <a class="p-4" href="{{ path('workshop_reservation', {id: workshop.id}) }}">S'inscire</a>
-    {% endif %}
 {% endblock %}
