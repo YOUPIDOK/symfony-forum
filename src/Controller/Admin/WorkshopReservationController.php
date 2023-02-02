@@ -17,7 +17,7 @@ class WorkshopReservationController extends AbstractController
     public function index(WorkshopReservationRepository $workshopReservationRepository): Response
     {
         return $this->render('pages/admin/workshop_reservation/index.html.twig', [
-            'workshop_reservations' => $workshopReservationRepository->findAll(),
+            'workshop_reservations' => $workshopReservationRepository->findAllWithNoUserHashed(),
         ]);
     }
 

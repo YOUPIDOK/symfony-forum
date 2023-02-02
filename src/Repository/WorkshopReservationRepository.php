@@ -52,6 +52,17 @@ class WorkshopReservationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllWithNoUserHashed()
+    {
+        return $this
+            ->createQueryBuilder('wr')
+            ->innerJoin('wr.student', 'student')
+            ->innerJoin('student.user', 'user')
+            ->where('user.isHashed = FALSE')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return WorkshopReservation[] Returns an array of WorkshopReservation objects
 //     */
