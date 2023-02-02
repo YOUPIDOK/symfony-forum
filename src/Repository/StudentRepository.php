@@ -54,6 +54,15 @@ class StudentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllNoHashedQb()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->innerJoin('s.user', 'user')
+            ->where('user.isHashed = FALSE')
+            ->orderBy('user.firstname', 'ASC');
+    }
+
     public function findAllNoHashed()
     {
         return $this

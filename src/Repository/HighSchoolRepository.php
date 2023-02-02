@@ -39,6 +39,15 @@ class HighSchoolRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllNoHashedQb()
+    {
+        return $this
+            ->createQueryBuilder('h')
+            ->innerJoin('h.user', 'user')
+            ->where('user.isHashed = FALSE')
+            ->orderBy('h.name', 'ASC');
+    }
+
     public function findAllNoHashed()
     {
         return $this

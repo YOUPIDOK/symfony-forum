@@ -11,6 +11,8 @@ use App\Entity\Speaker;
 use App\Entity\Workshop;
 use App\Form\CustomType\EntitySelectChoicesType;
 use App\Entity\WorkshopSector;
+use App\Repository\SpeakerRepository;
+use App\Repository\StudentRepository;
 use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -66,6 +68,9 @@ class WorkshopType extends AbstractType
                 'class' => Speaker::class,
                 'required' => false,
                 'multiple' => true,
+                'query_builder' => function (SpeakerRepository $speakerRepository) {
+                    return $speakerRepository->findAllNoHashedQb();
+                }
             ])
             ->add('jobs', EntitySelectChoicesType::class, [
                 'label' => 'Métiers',

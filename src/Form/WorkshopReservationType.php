@@ -7,6 +7,7 @@ use App\Entity\Workshop;
 use App\Entity\WorkshopReservation;
 use App\Entity\WorkshopSector;
 use App\Form\CustomType\EntitySelectChoicesType;
+use App\Repository\StudentRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,6 +21,9 @@ class WorkshopReservationType extends AbstractType
                 'label' => 'Étudiant',
                 'class' => Student::class,
                 'required' => false,
+                'query_builder' => function (StudentRepository $studentRepository) {
+                    return $studentRepository->findAllNoHashedQb();
+                }
             ])
             ->add('workshop', EntitySelectChoicesType::class, [
                 'label' => 'Atelier',

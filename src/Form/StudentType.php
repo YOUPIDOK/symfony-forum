@@ -2,8 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\HighSchool;
 use App\Entity\Student;
+use App\Entity\Workshop;
 use App\Enum\HighSchoolDegreeEnum;
+use App\Form\CustomType\EntitySelectChoicesType;
+use App\Repository\HighSchoolRepository;
+use App\Repository\StudentRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +25,14 @@ class StudentType extends AbstractType
                 'required' => true,
                 'choices' => HighSchoolDegreeEnum::getChoices()
             ])
-            ->add('highSchool');
+            ->add('highSchool' ,EntitySelectChoicesType::class, [
+                'label' => 'Lycée',
+                'class' => HighSchool::class,
+                'required' => false,
+                'query_builder' => function (HighSchoolRepository $highSchoolRepository) {
+                    return $highSchoolRepository->findAllNoHashedQb();
+                }
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
