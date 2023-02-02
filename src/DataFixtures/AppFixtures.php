@@ -368,15 +368,17 @@ class AppFixtures extends Fixture
             }
         }
 
+        $resourceDirPath = $this->parameterBag->get('kernel.project_dir') . '/data/resources/';
+        if (!is_dir($resourceDirPath)) {
+            mkdir($resourceDirPath, 0777, true);
+        }
+
         for ($i = 11; $i <= 20; $i++) {
             $originalName = 'fake-image.jpeg';
             $fakeImagePath = $this->parameterBag->get('kernel.project_dir') . '/' . $originalName;
             $fileName =  uniqid(rand()) . '.jpeg';
-            $resourceDirPath = $this->parameterBag->get('kernel.project_dir') . '/data/resources/';
             $filePath = $resourceDirPath .  $fileName;
-            if (!is_dir($resourceDirPath)) {
-                mkdir($resourceDirPath, 0777, true);
-            }
+
             copy($fakeImagePath, $filePath);
 
             $resource = (new Resource())
