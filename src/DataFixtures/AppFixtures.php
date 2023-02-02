@@ -372,7 +372,11 @@ class AppFixtures extends Fixture
             $originalName = 'fake-image.jpeg';
             $fakeImagePath = $this->parameterBag->get('kernel.project_dir') . '/' . $originalName;
             $fileName =  uniqid(rand()) . '.jpeg';
-            $filePath = $this->parameterBag->get('kernel.project_dir') . '/data/resources/' .  $fileName;
+            $resourceDirPath = $this->parameterBag->get('kernel.project_dir') . '/data/resources/';
+            $filePath = $resourceDirPath .  $fileName;
+            if (!is_dir($resourceDirPath)) {
+                mkdir($resourceDirPath, 0777, true);
+            }
             copy($fakeImagePath, $filePath);
 
             $resource = (new Resource())

@@ -5,7 +5,7 @@
 ```shell
 composer install
 php bin/console doctrine:database:create
-php bin/console doctrine:migrations:migrate 
+php bin/console doctrine:migrations:migrate # ou :  php bin/console doc:sch:up -f   
 php bin/console doctrine:fixtures:load          # Peut prendre un peux de temps avec le hashage des mots de passe
 yarn install
 yarn build
